@@ -1,0 +1,13 @@
+<form class="add-form">
+    <mat-form-field class="full-width">
+      <mat-label>Title</mat-label>
+      <input matInput placeholder="Title of task">
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Leave a message</mat-label>
+      <textarea matInput placeholder="Mesage" class="message" #message maxlength="476"></textarea>
+      <mat-hint align="end">{{message.value.length}} / 476</mat-hint>
+    </mat-form-field>
+    <button mat-raised-button color="primary">Add</button>
+</form>
