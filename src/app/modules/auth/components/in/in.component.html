@@ -1,0 +1,23 @@
+<div class="auth__wrap">
+    <mat-card class="auth__card">
+        <div class="auth__form">
+            <h2 class="auth__title">Sign In</h2>
+            <mat-form-field appearance="fill">
+                <mat-label>Enter your email</mat-label>
+                <input matInput placeholder="Email" [formControl]="email" required>
+                <mat-error *ngIf="email.invalid">{{getErrorEmail()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Enter your password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" [formControl]="password" required>
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="password.invalid">{{getErrorPassword()}}</mat-error>
+            </mat-form-field>
+            <button mat-flat-button color="primary" [disabled]="email.invalid || password.invalid" (click)="handle()">Log in</button>
+            <p class="auth__redirect">Do you have an account?<a mat-flat-button [routerLink]="[ '/auth/sign-up']">Registration</a></p>
+        </div>
+    </mat-card>
+</div>

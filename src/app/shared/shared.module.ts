@@ -12,6 +12,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
+import { MatStepperModule } from '@angular/material/stepper';
+import { StepperComponent } from './components/stepper/stepper.component';
+import { MatCardModule } from '@angular/material/card';
 
 const SHARED_MODULES = [   
   CommonModule,
@@ -26,12 +29,15 @@ const SHARED_MODULES = [
   MatButtonModule,
   MatSidenavModule,
   MatIconModule,
-  MatListModule
+  MatListModule,
+  MatStepperModule,
+  MatCardModule
 ]; 
 
 @NgModule({
   declarations: [
-    MainNavComponent
+    MainNavComponent,
+    StepperComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +45,8 @@ const SHARED_MODULES = [
   ],
   exports: [
     ...SHARED_MODULES,
-    MainNavComponent
+    MainNavComponent,
+    StepperComponent
   ]
 })
 export class SharedModule { }
