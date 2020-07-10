@@ -1,3 +1,4 @@
+import { FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-task.component.scss']
 })
 export class AddTaskComponent implements OnInit {
+
+  public title = new FormControl('', Validators.required);
+  public message = new FormControl('', Validators.required);
 
   constructor() { }
 

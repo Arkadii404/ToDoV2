@@ -1,3 +1,5 @@
+import { MaterialModule } from './../../material/material.module';
+import { SharedModule } from './../../shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -9,7 +11,9 @@ import { AdminComponent } from './components/admin/admin.component';
   declarations: [AdminComponent],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    SharedModule,
+    MaterialModule
   ]
 })
 export class AdminModule { }

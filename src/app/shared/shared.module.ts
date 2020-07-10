@@ -1,52 +1,31 @@
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
-import { MainNavComponent } from './components/main-nav/main-nav.component';
+import { MaterialModule } from './../material/material.module';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatInputModule } from '@angular/material/input';
-import { MatStepperModule } from '@angular/material/stepper';
-import { StepperComponent } from './components/stepper/stepper.component';
-import { MatCardModule } from '@angular/material/card';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+
+
 
 const SHARED_MODULES = [   
   CommonModule,
   ReactiveFormsModule,
   FormsModule,
   HttpClientModule,
-  RouterModule,
-  MatSidenavModule,
-  MatInputModule,
-  LayoutModule,
-  MatToolbarModule,
-  MatButtonModule,
-  MatSidenavModule,
-  MatIconModule,
-  MatListModule,
-  MatStepperModule,
-  MatCardModule
+  RouterModule,  
+  LayoutModule ,
+  MaterialModule
 ]; 
 
 @NgModule({
-  declarations: [
-    MainNavComponent,
-    StepperComponent
-  ],
+  declarations: [],
   imports: [
     CommonModule,
-    ...SHARED_MODULES,
+    ...SHARED_MODULES
   ],
   exports: [
-    ...SHARED_MODULES,
-    MainNavComponent,
-    StepperComponent
+    ...SHARED_MODULES
   ]
 })
 export class SharedModule { }

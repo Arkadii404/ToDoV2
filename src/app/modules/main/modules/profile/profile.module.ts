@@ -1,3 +1,4 @@
+import { MaterialModule } from './../../../../material/material.module';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { SharedModule } from './../../../../shared/shared.module';
 import { NgModule } from '@angular/core';
@@ -11,7 +12,8 @@ import { ProfileComponent } from './components/profile/profile.component';
   imports: [
     CommonModule,
     SharedModule,
-    ProfileRoutingModule
+    ProfileRoutingModule,
+    MaterialModule
   ]
 })
 export class ProfileModule { }

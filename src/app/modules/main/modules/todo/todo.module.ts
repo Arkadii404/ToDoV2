@@ -1,3 +1,4 @@
+import { MaterialModule } from './../../../../material/material.module';
 import { TodoRoutingModule } from './todo-routing-module';
 import { SharedModule } from './../../../../shared/shared.module';
 import { NgModule } from '@angular/core';
@@ -11,7 +12,8 @@ import { AddTaskComponent } from './components/add-task/add-task.component';
   imports: [
     CommonModule,
     SharedModule,
-    TodoRoutingModule
+    TodoRoutingModule,
+    MaterialModule
   ]
 })
 export class TodoModule { }
