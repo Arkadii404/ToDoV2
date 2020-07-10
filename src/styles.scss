@@ -8,6 +8,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     padding: 20px;
 }
 
+.title {
+    color: #fff;
+    text-decoration: none;
+}
+
 .add-form {
     min-width: 150px;
     max-width: 500px;
@@ -47,4 +52,38 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         margin: 30px 0 0 0 !important;
     }
 }
-
+.task {
+    width: 250px;
+    margin: 10px;
+    &__area {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__tools {
+        display: flex !important;
+        align-items: center;
+        padding: 0 !important;
+    } 
+    &__icon {
+        font-size: 20px;
+    }
+    &__checkbox {
+        width: 40px;
+        height: 40px;
+        flex-shrink: 0;
+        line-height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+.isDone {
+    text-decoration: line-through;
+    opacity: 0.4;
+}

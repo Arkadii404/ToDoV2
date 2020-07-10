@@ -1,20 +1,44 @@
+import { CoreModels } from 'src/app/core/models';
+import { StorageService } from './../../../../../../core/services/storage.service';
+import { TaskService } from './../../../../../../core/services/task.service';
 import { FormControl, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
   styleUrls: ['./add-task.component.scss']
 })
-export class AddTaskComponent implements OnInit {
+export class AddTaskComponent {
 
   public title = new FormControl('', Validators.required);
   public message = new FormControl('', Validators.required);
 
-  constructor() { }
+  constructor(
+    private readonly taskService: TaskService,
+    private readonly storageService: StorageService  
+  ) { }
 
-  ngOnInit(): void {
+  public addTask() {
+    let task: CoreModels.ITask = {
+      title: this.title.value,
+      message: this.message.value,
+      isDone: false,
+      time: new Date(),
+      userId: this.storageService.userId
+    };
+    this.taskService.setTask(task).subscribe(
+      () => {
+        this.taskService.addTasksSubject$.next(task)
+        this.resetForm()
+      },
+      () => console.error('Added was failed')
+    )
   }
 
+  public resetForm() {
+    this.title.reset();
+    this.message.reset();
+  }
 
 }

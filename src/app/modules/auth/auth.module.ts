@@ -1,4 +1,3 @@
-import { MaterialModule } from './../../material/material.module';
 import { SharedModule } from './../../shared/shared.module';
 import { AuthRoutingModule } from './auth-routing.module';
 import { NgModule } from '@angular/core';
@@ -14,8 +13,7 @@ import { UpComponent } from './components/up/up.component';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    SharedModule,
-    MaterialModule
+    SharedModule
   ]
 })
 export class AuthModule { }

@@ -6,9 +6,7 @@
   
     <mat-form-field class="full-width">
       <mat-label>Leave a message</mat-label>
-      <textarea matInput placeholder="Mesage" class="message" #message maxlength="476"></textarea>
-      <mat-hint align="end">{{message.value.length}} / 476</mat-hint>
+      <textarea matInput placeholder="Mesage" class="message" maxlength="476" [formControl]="message"></textarea>
     </mat-form-field>
-    <button mat-flat-button color="primary">Add</button>
+    <button mat-flat-button color="primary" [disabled]="message.invalid || title.invalid" (click)="addTask()">Add</button>
 </form>
-<mat-divider class="horizontal"></mat-divider>

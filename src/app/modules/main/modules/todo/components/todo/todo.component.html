@@ -1,1 +1,5 @@
 <app-add-task></app-add-task>
+<mat-divider class="horizontal"></mat-divider>
+<div class="task__area">
+    <app-task *ngFor="let task of tasks" [task]="task"></app-task>
+</div>

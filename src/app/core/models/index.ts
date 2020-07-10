@@ -14,4 +14,9 @@ export namespace CoreModels {
         userId: number;
         id?: number;
     }
+    export interface IUpdateTask {
+        title: string;
+        message: string;
+        isDone: boolean;
+    }
 }

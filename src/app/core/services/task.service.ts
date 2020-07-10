@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CoreModels } from '../models';
 import { ApiService } from './api.service';
@@ -9,6 +9,10 @@ import { StorageService } from './storage.service';
   providedIn: 'root'
 })
 export class TaskService {
+
+  public addTasksSubject$ = new Subject<CoreModels.ITask>();
+
+  public removeSubject$ = new Subject<number>();
 
   constructor(
     private readonly apiService: ApiService,
@@ -32,4 +36,13 @@ export class TaskService {
   public setTask(task: CoreModels.ITask): Observable<CoreModels.ITask> {
     return this.apiService.request('POST', 'tasks', task)
   }
+
+  public removeTask(id: number): Observable<CoreModels.ITask> {
+    return this.apiService.request('DELETE', `tasks/${id}`, {});
+  }
+
+  public updateTask(id: number, dto: CoreModels.IUpdateTask) {
+    return this.apiService.request('PATCH', `tasks/${id}`, dto);
+  }
+
 }

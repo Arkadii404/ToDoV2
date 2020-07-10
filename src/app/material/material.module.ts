@@ -1,7 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { SharedModule } from './../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,6 +13,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { StepperComponent } from './components/stepper/stepper.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 
@@ -26,7 +26,8 @@ const MATERIAL_MODULES = [
   MatIconModule,
   MatListModule,
   MatStepperModule,
-  MatCardModule, 
+  MatCardModule,
+  MatCheckboxModule
 ]
 
 @NgModule({
