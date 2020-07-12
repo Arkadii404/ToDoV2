@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Change password</h1>
+<div mat-dialog-content>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Write current password</mat-label>
+            <input matInput placeholder="Old password" [formControl]="oldCtrl" type="password">
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Write new password</mat-label>
+            <input matInput placeholder="New password" [formControl]="newCtrl" type="password">
+        </mat-form-field>
+    </p>
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-flat-button color="accent" (click)="submit()" [disabled]="oldCtrl.invalid || newCtrl.invalid">Save</button>
+</div>

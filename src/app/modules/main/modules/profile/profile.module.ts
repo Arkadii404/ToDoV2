@@ -4,11 +4,12 @@ import { SharedModule } from './../../../../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './components/profile/profile.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 
 
 @NgModule({
-  declarations: [ProfileComponent],
+  declarations: [ProfileComponent, DialogComponent],
   imports: [
     CommonModule,
     SharedModule,
