@@ -1,3 +1,4 @@
+import { ErrorService } from './../../../../../../core/services/error.service';
 import { CoreModels } from 'src/app/core/models';
 import { StorageService } from './../../../../../../core/services/storage.service';
 import { TaskService } from './../../../../../../core/services/task.service';
@@ -16,7 +17,8 @@ export class AddTaskComponent {
 
   constructor(
     private readonly taskService: TaskService,
-    private readonly storageService: StorageService  
+    private readonly storageService: StorageService,
+    private readonly errorService: ErrorService 
   ) { }
 
   public addTask() {
@@ -32,7 +34,7 @@ export class AddTaskComponent {
         this.taskService.addTasksSubject$.next(task)
         this.resetForm()
       },
-      () => console.error('Added was failed')
+      () => this.errorService.throwServerError('Added was failed')
     )
   }
 

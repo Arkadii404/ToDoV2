@@ -1,3 +1,4 @@
+import { ErrorService } from './../../../../core/services/error.service';
 import { Router } from '@angular/router';
 import { StorageService } from './../../../../core/services/storage.service';
 import { UserService } from './../../../../core/services/user.service';
@@ -14,6 +15,7 @@ export class InComponent {
   constructor(
     private readonly userService: UserService,
     private readonly storageService: StorageService,
+    private readonly errorService: ErrorService,
     private readonly router: Router 
   ) { }
 
@@ -43,17 +45,17 @@ export class InComponent {
         let user = users.find(user => user.password === this.password.value && user.email == this.email.value);
         if (user) {
           if (user.banned) {
-            console.error('You are banned');
+            this.errorService.throwError('You are banned');
           } else {
             this.storageService.userId = user.id;
             this.router.navigateByUrl('main/todo')
           }
         } else {
-          console.error('There are no users with this credantials')
+          this.errorService.throwError('There are no users with this credantials')
         }
       },
       () => {
-        console.error('Sign in was failed')
+        this.errorService.throwServerError('Sign in was failed')
       }
     )
   }

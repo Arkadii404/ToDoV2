@@ -1,3 +1,4 @@
+import { ErrorService } from './../../../../../../core/services/error.service';
 import { FormControl, Validators } from '@angular/forms';
 import { TaskService } from './../../../../../../core/services/task.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -18,7 +19,10 @@ export class TaskComponent implements OnInit {
 
   public message = new FormControl('', Validators.required);
 
-  constructor(private readonly taskService: TaskService) { }
+  constructor(
+    private readonly taskService: TaskService,
+    private readonly errorService: ErrorService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -26,7 +30,7 @@ export class TaskComponent implements OnInit {
   public remove() {
     this.taskService.removeTask(this.task.id).subscribe(
       () => this.taskService.removeSubject$.next(this.task.id),
-      () => console.error('Un success delete')
+      () => this.errorService.throwServerError('Unsuccess delete')
     )
   }
 
@@ -42,7 +46,7 @@ export class TaskComponent implements OnInit {
       title: this.task.title
     }).subscribe({
       error() {
-        console.error('Updation was failed')
+        this.errorServise.throwServirError('Updation was failed')
       }
     })
   }

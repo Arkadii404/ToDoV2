@@ -13,6 +13,7 @@ import { TaskComponent } from './components/task/task.component';
     CommonModule,
     SharedModule,
     TodoRoutingModule
-  ]
+  ],
+  providers: []
 })
 export class TodoModule { }

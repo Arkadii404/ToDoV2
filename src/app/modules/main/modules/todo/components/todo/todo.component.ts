@@ -1,3 +1,4 @@
+import { ErrorService } from './../../../../../../core/services/error.service';
 import { TaskService } from './../../../../../../core/services/task.service';
 import { Component, OnInit } from '@angular/core';
 import { CoreModels } from 'src/app/core/models';
@@ -11,18 +12,25 @@ export class TodoComponent implements OnInit {
 
   public tasks: CoreModels.ITask[];
 
-  constructor(private readonly taskService: TaskService) { }
+  public isLoad = false;
+
+  constructor(
+    private readonly taskService: TaskService,
+    private readonly errorService: ErrorService
+  ) { }
 
   ngOnInit(): void {
     this.taskService.getTusksOfCurrentUser().subscribe(
-      tasks => this.tasks = tasks.sort((a, b) => {
+      tasks => {this.tasks = tasks.sort((a, b) => {
         if (a.time > b.time) {
           return -1
         } else {
           return 1
         }
-      }), 
-      () => console.error('Can not get tasks')
+      });
+        this.isLoad = true;
+      }, 
+      () => this.errorService.throwServerError('Can not get tasks')
     );
 
     this.taskService.removeSubject$.asObservable().subscribe(      

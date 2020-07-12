@@ -1,3 +1,4 @@
+import { ErrorService } from './../../../core/services/error.service';
 import { StorageService } from './../../../core/services/storage.service';
 import { UserService } from './../../../core/services/user.service';
 import { Component, OnInit } from '@angular/core';
@@ -21,7 +22,8 @@ export class StepperComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private readonly userService: UserService,
     private readonly router: Router,
-    private readonly storageService: StorageService
+    private readonly storageService: StorageService,
+    private readonly errorService: ErrorService
   ) {}
 
   ngOnInit() {
@@ -40,7 +42,7 @@ export class StepperComponent implements OnInit {
     this.userService.getUsers().subscribe(
       users => {
         if (users.filter(user => user.email === this.secondFormGroup.controls.secondCtrl.value).length) {
-          console.error('User with this email has been registrated yet')
+          this.errorService.throwError('User with this email has been registrated yet')
           this.router.navigateByUrl('auth/sign-in')
         } else {
           this.userService.setUser({
@@ -53,9 +55,12 @@ export class StepperComponent implements OnInit {
               this.router.navigateByUrl('main');
               this.storageService.userId = user.id;
             },
-            err => console.error(err)
+            () => this.errorService.throwServerError('Can not add user')
           )
         }
+      },
+      () => {
+        this.errorService.throwServerError('Can not get users')
       }
     );  
   }

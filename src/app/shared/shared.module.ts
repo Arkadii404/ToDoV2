@@ -26,6 +26,7 @@ const SHARED_MODULES = [
   ],
   exports: [
     ...SHARED_MODULES
-  ]
+  ],
+  providers: []
 })
 export class SharedModule { }
