@@ -3,11 +3,12 @@ import { AdminTodoRoutingModule } from './admin-todo-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminTodoComponent } from './components/admin-todo/admin-todo.component';
+import { AdminTaskComponent } from './components/admin-task/admin-task.component';
 
 
 
 @NgModule({
-  declarations: [AdminTodoComponent],
+  declarations: [AdminTodoComponent, AdminTaskComponent],
   imports: [
     CommonModule,
     AdminTodoRoutingModule,

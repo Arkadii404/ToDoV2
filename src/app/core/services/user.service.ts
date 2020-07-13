@@ -34,4 +34,8 @@ export class UserService {
   public updatePassword(password: string): Observable<CoreModels.IUser> {
     return this.apiService.request('PATCH', `users/${this.storageService.userId}`, {password});
   }
+
+  public bunn(banned: boolean, id: number): Observable<CoreModels.IUser> {
+    return this.apiService.request('PATCH', `users/${id}`, {banned});
+  }
 }
