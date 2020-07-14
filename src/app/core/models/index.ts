@@ -19,4 +19,13 @@ export namespace CoreModels {
         message: string;
         isDone: boolean;
     }
+    export interface IEvent {
+        title: string;
+        description: string;
+        place: string;
+        date: string;
+        theme: string;
+        whoCome: number[];
+        id?: number;
+    }
 }

@@ -1,1 +1,67 @@
-<p>admin-events works!</p>
+<div [hidden]="!isLoad">
+    <app-add-event></app-add-event>
+    
+    <mat-divider class="horizontal"></mat-divider>
+    
+    <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. 20" #input>
+    </mat-form-field>
+    
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="id"> ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+    
+        <!-- Title Column -->
+        <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+            <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+        </ng-container>
+    
+        <!-- Theme Column -->
+        <ng-container matColumnDef="theme">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Theme </th>
+            <td mat-cell *matCellDef="let element"> {{element.theme}} </td>
+        </ng-container>
+    
+        <!-- Place Column -->
+        <ng-container matColumnDef="place">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Place </th>
+            <td mat-cell *matCellDef="let element"> {{element.place}} </td>
+        </ng-container>
+    
+        <!-- Date Column -->
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+        </ng-container>
+    
+        <!-- Who come Column -->
+        <ng-container matColumnDef="whoCome">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Who come </th>
+            <td mat-cell *matCellDef="let element"> {{element.whoCome}} </td>
+        </ng-container>
+    
+        <!-- Description Column -->
+        <ng-container matColumnDef="description" class="description">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="description"> Description </th>
+            <td mat-cell *matCellDef="let element" class="description"> {{element.description}} </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+
+<div class="spinner__wrapper" *ngIf="!isLoad">
+    <mat-spinner class="spinner"></mat-spinner>
+</div>

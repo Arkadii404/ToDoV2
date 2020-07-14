@@ -22,6 +22,8 @@ import { RouterModule } from '@angular/router';
 import { AdminNavComponent } from './components/admin-nav/admin-nav.component';
 import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { StepperComponent } from './components/stepper/stepper.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 const MATERIAL_MODULES = [
@@ -40,7 +42,9 @@ const MATERIAL_MODULES = [
   MatSnackBarModule,
   MatDialogModule,
   MatPaginatorModule,
-  MatTableModule
+  MatTableModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 ];
 
 @NgModule({
@@ -56,12 +60,7 @@ const MATERIAL_MODULES = [
     FormsModule,
     RouterModule,
     HttpClientModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule
+    LayoutModule
   ],
   exports: [
     ...MATERIAL_MODULES,

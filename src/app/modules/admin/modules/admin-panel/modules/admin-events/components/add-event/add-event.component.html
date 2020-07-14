@@ -1,0 +1,26 @@
+<form class="event__form">
+    <mat-form-field appearance="standard" class="event__input">
+        <mat-label>Write a title</mat-label>
+        <input matInput placeholder="Title" [formControl]="title">
+    </mat-form-field>
+    <mat-form-field appearance="standard" class="event__input">
+        <mat-label>Write a place</mat-label>
+        <input matInput placeholder="Place" [formControl]="place">
+    </mat-form-field>
+    <mat-form-field appearance="standard" class="event__input">
+        <mat-label>Write a theme</mat-label>
+        <input matInput placeholder="Theme" [formControl]="theme">
+    </mat-form-field>
+    <mat-form-field appearance="standard" class="event__input">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter" [formControl]="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker touchUi></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+        <mat-label>Write a description</mat-label>
+        <textarea matInput placeholder="Description" class="event__textarea" [formControl]="description"></textarea>
+    </mat-form-field>
+    <button mat-flat-button color="primary" class="event__button" (click)="check()"
+        [disabled]="title.invalid || place.invalid || theme.invalid || date.invalid || description.invalid">Add</button>
+</form>
