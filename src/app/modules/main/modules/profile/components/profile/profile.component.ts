@@ -1,3 +1,4 @@
+import { StorageService } from './../../../../../../core/services/storage.service';
 import { DialogComponent } from './../dialog/dialog.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,7 +20,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private readonly userService: UserService,
     private readonly errorSrvice: ErrorService,
-    public readonly dialog: MatDialog
+    public readonly dialog: MatDialog,
+    private readonly storageService: StorageService
   ) { }
 
   ngOnInit(): void {
@@ -36,6 +38,10 @@ export class ProfileComponent implements OnInit {
 
   public openDialog() {
     this.dialog.open(DialogComponent);
+  }
+
+  public exit() {
+    this.storageService.clearUser();
   }
 
 }

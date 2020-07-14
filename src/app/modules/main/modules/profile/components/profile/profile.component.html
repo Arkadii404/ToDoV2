@@ -5,6 +5,7 @@
         <mat-list-item role="listitem">
             <button mat-flat-button color="primary" (click)="openDialog()">Change password</button>
         </mat-list-item>
+        <mat-list-item role="listitem"><button mat-button color="warn" (click)="exit()">Exit</button></mat-list-item>
     </mat-list>
 </ng-container>
 <div class="spinner__wrapper" *ngIf="!isLoad">
