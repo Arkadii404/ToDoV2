@@ -33,8 +33,7 @@ export class AdminEventsComponent implements OnInit {
   ngOnInit(): void {
     this.eventService.getEvents().subscribe(
       events => {
-        this.events = events;
-        
+        this.events = events;        
         events.forEach(event => {
           let date = new Date(event.date);
           let day = date.getDate().toString();
@@ -54,6 +53,11 @@ export class AdminEventsComponent implements OnInit {
         this.isLoad = true;
       },
       () => this.errorService.throwServerError('Can not get events')
+    )
+    this.eventService.addSubject$.asObservable().subscribe(
+      event => {
+        this.dataSource.data.push(event)
+      }
     )
   }
   public applyFilter(event: Event) {

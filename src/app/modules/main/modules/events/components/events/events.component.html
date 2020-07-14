@@ -1,1 +1,10 @@
-<p>events works!</p>
+<ng-container *ngIf="isLoad">
+    <h2>Events</h2>
+    <mat-divider class="horizontal"></mat-divider>
+    <ng-container *ngFor="let event of events">
+        <app-event-card [event]="event"></app-event-card>
+    </ng-container>
+</ng-container> 
+<div class="spinner__wrapper" *ngIf="!isLoad">
+    <mat-spinner class="spinner"></mat-spinner>
+</div>

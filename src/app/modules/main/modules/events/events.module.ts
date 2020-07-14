@@ -3,11 +3,12 @@ import { SharedModule } from './../../../../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EventsComponent } from './components/events/events.component';
+import { EventCardComponent } from './components/event-card/event-card.component';
 
 
 
 @NgModule({
-  declarations: [EventsComponent],
+  declarations: [EventsComponent, EventCardComponent],
   imports: [
     CommonModule,
     SharedModule,

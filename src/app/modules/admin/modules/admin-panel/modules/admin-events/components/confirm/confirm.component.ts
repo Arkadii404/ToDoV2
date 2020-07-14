@@ -27,7 +27,6 @@ export class ConfirmComponent implements OnInit {
   public add() {
     this.eventService.addEvent(this.event).subscribe(
       () => {
-        this.eventService.addSubject$.next(true);
         this.dialog.closeAll();
       },
       () => this.errorService.throwServerError('Added was failed')

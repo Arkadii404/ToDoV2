@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CoreModels } from 'src/app/core/models';
+import { ErrorService } from './../../../../../../core/services/error.service';
+import { EventService } from './../../../../../../core/services/event.service';
 
 @Component({
   selector: 'app-events',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventsComponent implements OnInit {
 
-  constructor() { }
+  public isLoad: boolean = false;
+
+  public events: CoreModels.IEvent[];
+
+  constructor(
+    private readonly  eventService: EventService,
+    private readonly errorSrvice: ErrorService
+  ) { }
 
   ngOnInit(): void {
+    this.eventService.getForUser().subscribe(
+      events => {
+        this.events = events;
+        this.isLoad = true;
+      }, 
+      () => this.errorSrvice.throwServerError('Can not get events')
+    )
   }
 
 }
