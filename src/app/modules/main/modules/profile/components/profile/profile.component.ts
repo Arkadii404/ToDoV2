@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { StorageService } from './../../../../../../core/services/storage.service';
 import { DialogComponent } from './../dialog/dialog.component';
 import { Component, OnInit } from '@angular/core';
@@ -21,7 +22,8 @@ export class ProfileComponent implements OnInit {
     private readonly userService: UserService,
     private readonly errorSrvice: ErrorService,
     public readonly dialog: MatDialog,
-    private readonly storageService: StorageService
+    private readonly storageService: StorageService,
+    private readonly router: Router
   ) { }
 
   ngOnInit(): void {
@@ -42,6 +44,7 @@ export class ProfileComponent implements OnInit {
 
   public exit() {
     this.storageService.clearUser();
+    this.router.navigateByUrl('auth');
   }
 
 }

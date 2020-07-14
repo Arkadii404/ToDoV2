@@ -1,3 +1,4 @@
+import { AdminGuard } from './../../core/guards/admin.guard';
 import { AdminComponent } from './components/admin/admin.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -9,12 +10,12 @@ const routes: Routes = [
     pathMatch: 'prefix'
   },
   {
-    path: 'auth', loadChildren: () => import('./modules/admin-auth/admin-auth.module').then(
+    path: 'auth', canActivate: [AdminGuard], loadChildren: () => import('./modules/admin-auth/admin-auth.module').then(
       data => data.AdminAuthModule
     )
   },
   {
-    path: 'panel', loadChildren: () => import('./modules/admin-panel/admin-panel.module').then(
+    path: 'panel', canActivate: [AdminGuard], loadChildren: () => import('./modules/admin-panel/admin-panel.module').then(
       data => data.AdminPanelModule
     )
   }

@@ -1,1 +1,9 @@
-<p>admin-auth works!</p>
+<mat-card class="form">
+    <p>
+        <mat-form-field appearance="standard" class="input">
+            <mat-label>Password</mat-label>
+            <input matInput [formControl]="passControl" (input)="check($event)">
+        </mat-form-field>
+    </p>
+    <button mat-flat-button color="primary" [disabled]="passControl.invalid" (click)="handle()">Log in</button>
+</mat-card>
