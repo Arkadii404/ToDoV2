@@ -1,3 +1,4 @@
+import { StorageService } from './storage.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -9,8 +10,8 @@ import { ApiService } from './api.service';
 export class AdminService {
 
   constructor(
-    private readonly apiService: ApiService,
-    private readonly router: Router
+    private readonly storageService: StorageService,
+    private readonly apiService: ApiService
   ) { }
 
   public getAdminPass(): Observable<string[]> {
@@ -18,12 +19,11 @@ export class AdminService {
   }
 
   public initAdmin() {
-    localStorage.setItem('admin', 'true');
-    this.router.navigateByUrl('admin/panel');
+    this.storageService.initAdmin();
   }
 
   public removeAdmin() {
-    localStorage.removeItem('admin');
+    this.storageService.removeAdmin();
   }
   
 }

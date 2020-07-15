@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ThemeModule } from './../material/theme.module';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 
@@ -19,13 +20,14 @@ const SHARED_MODULES = [
 ]; 
 
 @NgModule({
-  declarations: [],
+  declarations: [NotFoundComponent],
   imports: [
     CommonModule,
     ...SHARED_MODULES
   ],
   exports: [
-    ...SHARED_MODULES
+    ...SHARED_MODULES,
+    NotFoundComponent
   ],
   providers: []
 })
