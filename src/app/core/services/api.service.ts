@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -8,7 +9,7 @@ import { delay } from 'rxjs/operators';
 })
 export class ApiService {
 
-  private readonly endpoint: string = 'http://localhost:3000'
+  private readonly endpoint: string = environment.endpoint;
 
   constructor(private readonly http: HttpClient) { }
 
