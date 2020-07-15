@@ -7,6 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -22,8 +24,6 @@ import { RouterModule } from '@angular/router';
 import { AdminNavComponent } from './components/admin-nav/admin-nav.component';
 import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { StepperComponent } from './components/stepper/stepper.component';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
 
 
 const MATERIAL_MODULES = [
@@ -69,4 +69,4 @@ const MATERIAL_MODULES = [
     AdminNavComponent
   ]
 })
-export class MaterialModule { }
+export class ThemeModule { }

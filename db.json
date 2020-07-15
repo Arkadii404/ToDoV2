@@ -1,0 +1,126 @@
+{
+  "tasks": [
+    {
+      "title": "gjfjfj",
+      "message": "gfhjfgjfjhfjf",
+      "isDone": false,
+      "time": "2020-07-10T09:00:12.880Z",
+      "userId": 2,
+      "id": 2
+    },
+    {
+      "title": "Task",
+      "message": "Add",
+      "isDone": false,
+      "time": "2020-07-10T09:00:43.714Z",
+      "userId": 2,
+      "id": 3
+    },
+    {
+      "title": "New task",
+      "message": "3",
+      "isDone": false,
+      "time": "2020-07-10T09:03:09.898Z",
+      "userId": 2,
+      "id": 4
+    },
+    {
+      "title": "ertyui",
+      "message": "oiuytrew ",
+      "isDone": false,
+      "time": "2020-07-10T09:04:44.866Z",
+      "userId": 2,
+      "id": 6
+    },
+    {
+      "title": "New",
+      "message": "5",
+      "isDone": false,
+      "time": "2020-07-10T09:06:26.195Z",
+      "userId": 2,
+      "id": 7
+    },
+    {
+      "title": "New task",
+      "message": "6",
+      "isDone": false,
+      "time": "2020-07-10T09:11:58.625Z",
+      "userId": 2,
+      "id": 8
+    },
+    {
+      "title": "dfghjkl;",
+      "message": "Hello",
+      "isDone": false,
+      "time": "2020-07-10T09:23:38.722Z",
+      "userId": 2,
+      "id": 9
+    },
+    {
+      "title": "Hello",
+      "message": "It's me",
+      "isDone": false,
+      "time": "2020-07-10T13:22:59.314Z",
+      "userId": 1,
+      "id": 10
+    }
+  ],
+  "users": [
+    {
+      "name": "User",
+      "email": "email@email.com",
+      "password": "12345678",
+      "banned": false,
+      "id": 1
+    },
+    {
+      "name": "Test",
+      "email": "test@test",
+      "password": "12345678",
+      "banned": false,
+      "id": 2
+    }
+  ],
+  "events": [
+    {
+      "date": "2020-07-21T21:00:00.000Z",
+      "description": "<mat-list> is a container component that wraps and formats a series of line items. As the base list component, it provides Material Design styling, but no behavior of its own.",
+      "place": "Nikolaev",
+      "theme": "JS, Node Js",
+      "title": "JS Camp",
+      "whoCome": [],
+      "id": 1
+    },
+    {
+      "date": "2020-07-21T21:00:00.000Z",
+      "description": "ach paginator instance requires:\n\nThe number of items per page (default set to 50)\nThe total number of items being paged\nThe current page index defaults to 0, but can be explicitly set via pageIndex.\n\nWhen the user interacts with the paginator, a PageEvent will be fired that can be used to update any associated data view.",
+      "place": "America",
+      "theme": "asp.net",
+      "title": "New event",
+      "whoCome": [],
+      "id": 2
+    },
+    {
+      "date": "2022-12-24T21:00:00.000Z",
+      "description": "ach paginator instance requires:\n\nThe number of items per page (default set to 50)\nThe total number of items being paged\nThe current page index defaults to 0, but can be explicitly set via pageIndex.\n\nWhen the user interacts with the paginator, a PageEvent will be fired that can be used to update any associated data view.",
+      "place": "Place",
+      "theme": "Theme",
+      "title": "Title",
+      "whoCome": [
+        2
+      ],
+      "id": 3
+    }
+  ],
+  "admins": [
+    "wekc$drim2u2$hrc87tey^vw8cnye8vhfj$fd*",
+    "1"
+  ],
+  "features": {
+    "watch-events": [
+      1,
+      2,
+      5
+    ]
+  }
+}
