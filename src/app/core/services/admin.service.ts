@@ -1,7 +1,7 @@
-import { ApiService } from './api.service';
-import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class AdminService {
   ) { }
 
   public getAdminPass(): Observable<string[]> {
-    return this.apiService.request('GET', 'admins', {})
+    return this.apiService.request('GET', 'admins', {});
   }
 
   public initAdmin() {

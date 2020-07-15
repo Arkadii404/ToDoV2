@@ -1,3 +1,4 @@
+import { EventGuard } from './../../core/guards/event.guard';
 import { MainComponent } from './components/main/main.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -23,7 +24,7 @@ const routes: Routes = [
         )
       },
       {
-        path: 'events', loadChildren: () => import('./modules/events/events.module').then(
+        path: 'events', canActivate: [EventGuard] ,loadChildren: () => import('./modules/events/events.module').then(
           data => data.EventsModule
         )
       }
