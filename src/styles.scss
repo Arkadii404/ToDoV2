@@ -131,8 +131,27 @@ body {
     }
 }
 
+.sort {
+    display: flex;
+    width: 100%;
+    .input {
+      width: 20%;
+      margin-right: 10px;
+    }
+    button {
+      height: 40px;
+      margin: 3px;
+    }
+  }
+
 @media (max-width: 550px) {
     .event__form {
         grid-template-columns: 1fr;
+    }
+    .sort {
+        flex-direction: column;
+        .input {
+            width: 100% !important;
+        }
     }
 }

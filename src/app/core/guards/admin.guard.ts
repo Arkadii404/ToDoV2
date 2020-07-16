@@ -10,7 +10,7 @@ export class AdminGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log(state.url)
+
       if (state.url.startsWith('/admin/panel')) {
         if (localStorage.getItem('admin')) {
           return true;

@@ -5,6 +5,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CoreModels } from 'src/app/core/models';
 import { ErrorService } from './../../../../../../../../core/services/error.service';
 import { EventService } from './../../../../../../../../core/services/event.service';
+import { FormControl } from '@angular/forms';
+
+
+interface IMode {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-admin-events',
@@ -20,6 +27,13 @@ export class AdminEventsComponent implements OnInit {
   public dataSource: MatTableDataSource<any>;
 
   public displayedColumns: string[] = ['id', 'title', 'theme', 'place', 'date', 'whoCome', 'description'];
+
+  public modes: IMode[] = [
+    {value: 'id', viewValue: 'ID'}
+  ];
+
+  public modeControl = new FormControl(this.modes[0].value);
+  public valueControl = new FormControl(null);
 
   constructor(
     private readonly eventService: EventService,
@@ -67,6 +81,36 @@ export class AdminEventsComponent implements OnInit {
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
+    }
+  }
+
+  public filter() {
+    let mode: string = this.modeControl.value;
+    let value: string = this.valueControl.value;
+    if (mode === 'none') {
+      this.dataSource.data = this.events;
+    } else if (mode === 'id') {
+      if (value.includes('<')) {
+        this.dataSource.data = this.events.filter(event => event.id < Number(value.slice(1)));
+      } else if (value.includes('>')) {
+        this.dataSource.data = this.events.filter(event => event.id > Number(value.slice(1)));
+      } else if (value.includes('-')) {
+        let start: number = +value.split('-')[0];
+        let end: number = +value.split('-')[1];
+        this.dataSource.data = this.events.filter(event => event.id >= start && event.id <= end);
+      } else {
+        this.dataSource.data = this.events.filter(event => event.id == Number(value));
+      }
+    }
+  }
+  public reset() {
+    this.dataSource.data = this.events;
+    this.valueControl.reset();
+  }
+
+  public check(event: KeyboardEvent) {
+    if (event.keyCode === 13) {
+      this.filter();
     }
   }
 

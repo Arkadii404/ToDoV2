@@ -2,7 +2,7 @@
     <p>
         <mat-form-field appearance="standard" class="input">
             <mat-label>Password</mat-label>
-            <input matInput [formControl]="passControl" (input)="check($event)">
+            <input matInput [formControl]="passControl" (keyup)="check($event)">
         </mat-form-field>
     </p>
     <button mat-flat-button color="primary" [disabled]="passControl.invalid" (click)="handle()">Log in</button>

@@ -1,11 +1,17 @@
+import { CoreModels } from 'src/app/core/models';
+import { FormControl } from '@angular/forms';
 import { ErrorService } from './../../../../../../../../core/services/error.service';
 import { TaskService } from './../../../../../../../../core/services/task.service';
-import { CoreModels } from 'src/app/core/models';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
+
+interface IMode {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-admin-todo',
@@ -20,6 +26,16 @@ export class AdminTodoComponent implements OnInit {
   
   public dataSource: MatTableDataSource<any>;
 
+  public modes: IMode[] = [
+    {value: 'id', viewValue: 'ID'},
+    {value: 'user', viewValue: 'User ID'}
+  ];
+
+  public modeControl = new FormControl(this.modes[0].value);
+  public valueControl = new FormControl(null);
+
+  public tasks: CoreModels.ITask[];
+
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
@@ -32,6 +48,7 @@ export class AdminTodoComponent implements OnInit {
     this.taskService.getAllTasks().subscribe(
       tasks => {
         this.dataSource = new MatTableDataSource(tasks);
+        this.tasks = tasks;
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.isLoad = true;
@@ -46,6 +63,48 @@ export class AdminTodoComponent implements OnInit {
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
+    }
+  }
+
+  public filter() {
+    let mode: string = this.modeControl.value;
+    let value: string = this.valueControl.value;
+    if (mode === 'none') {
+      this.dataSource.data = this.tasks;
+    } else if (mode === 'id') {
+      if (value.includes('<')) {
+        this.dataSource.data = this.tasks.filter(task => task.id < Number(value.slice(1)));
+      } else if (value.includes('>')) {
+        this.dataSource.data = this.tasks.filter(task => task.id > Number(value.slice(1)));
+      } else if (value.includes('-')) {
+        let start: number = +value.split('-')[0];
+        let end: number = +value.split('-')[1];
+        this.dataSource.data = this.tasks.filter(task => task.id >= start && task.id <= end);
+      } else {
+        this.dataSource.data = this.tasks.filter(task => task.id == Number(value));
+      }
+    } else if (mode === 'user') {
+      if (value.includes('<')) {
+        this.dataSource.data = this.tasks.filter(task => task.userId < Number(value.slice(1)));
+      } else if (value.includes('>')) {
+        this.dataSource.data = this.tasks.filter(task => task.userId > Number(value.slice(1)));
+      } else if (value.includes('-')) {
+        let start: number = +value.split('-')[0];
+        let end: number = +value.split('-')[1];
+        this.dataSource.data = this.tasks.filter(task => task.userId >= start && task.userId <= end);
+      } else {
+        this.dataSource.data = this.tasks.filter(task => task.userId == Number(value));
+      }
+    }
+  }
+  public reset() {
+    this.dataSource.data = this.tasks;
+    this.valueControl.reset();
+  }
+
+  public check(event: KeyboardEvent) {
+    if (event.keyCode === 13) {
+      this.filter();
     }
   }
 

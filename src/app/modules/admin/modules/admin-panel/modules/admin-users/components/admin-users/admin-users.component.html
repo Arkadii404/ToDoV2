@@ -1,3 +1,22 @@
+<div [hidden]="!isLoad" class="sort">
+    <mat-form-field class="input">
+        <mat-label>Sort option</mat-label>
+        <mat-select [formControl]="modeControl" name="option">
+            <mat-option value="none">None</mat-option>
+            <mat-option *ngFor="let mode of modes" [value]="mode.value">
+                {{mode.viewValue}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="input">
+        <mat-label>Sort value</mat-label>
+        <input matInput placeholder="Ex. >10" [formControl]="valueControl" matTooltip="Chose sort value for ex. if you want to find users with id that bigest then ten write >10 without spaces.
+        Use '-' to show range for ex. 5-9, or just write a number for ex. 13 to find by it. User 'true' or 'false' to check status." matTooltipHideDelay="100"
+        (keyup)="check($event)">
+    </mat-form-field>
+    <button mat-flat-button color="primary" (click)="filter()">Apply</button>
+    <button mat-flat-button color="primary" (click)="reset()">Reset</button>
+</div>
 <p [hidden]="!isLoad">
     <mat-form-field>
         <mat-label>Filter</mat-label>

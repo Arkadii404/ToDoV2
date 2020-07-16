@@ -24,6 +24,8 @@ import { RouterModule } from '@angular/router';
 import { AdminNavComponent } from './components/admin-nav/admin-nav.component';
 import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { StepperComponent } from './components/stepper/stepper.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 const MATERIAL_MODULES = [
@@ -44,7 +46,9 @@ const MATERIAL_MODULES = [
   MatPaginatorModule,
   MatTableModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatSelectModule,
+  MatTooltipModule
 ];
 
 @NgModule({
