@@ -1,3 +1,6 @@
+import { Router } from '@angular/router';
+import { AdminService } from './../../../core/services/admin.service';
+import { StorageService } from './../../../core/services/storage.service';
 import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
@@ -16,6 +19,15 @@ export class AdminNavComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private readonly adminService: AdminService,
+    private readonly router: Router
+  ) {}
+
+  public exit() {
+    this.adminService.removeAdmin();
+    this.router.navigateByUrl('')
+  }
 
 }

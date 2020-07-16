@@ -20,3 +20,13 @@
   color: #673ab7;
   background: rgba(103,58,183,.15);
 }
+.nav {
+  display: flex;
+  justify-content: space-between;
+}
+.link {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  margin-right: 20px;
+}

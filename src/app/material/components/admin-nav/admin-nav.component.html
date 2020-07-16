@@ -9,12 +9,17 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>To Do v2 Admin-Panel</span>
+    <mat-toolbar color="primary" class="nav">
+      <div>
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <span>To Do v2 Admin-Panel</span>
+      </div>
+      <div>
+        <a [routerLink]="[ '/admin' ]" class="link" (click)="exit()">Go to To Do</a>
+      </div>
     </mat-toolbar>
     <div class="main__content">
       <router-outlet></router-outlet>
