@@ -49,7 +49,9 @@ export class StepperComponent implements OnInit {
             name: this.firstFormGroup.controls.firstCtrl.value,
             email: this.secondFormGroup.controls.secondCtrl.value,
             password: this.thirdFormGroup.controls.thirdCtrl.value,
-            banned: false
+            status: 'active',
+            features: [],
+            permisions: []
           }).subscribe(
             user => {
               this.router.navigateByUrl('main');

@@ -25,6 +25,11 @@ const routes: Routes = [
         path: 'events', loadChildren: () => import('./modules/admin-events/admin-events.module').then(
           data => data.AdminEventsModule
         )
+      },
+      {
+        path: 'permisions', loadChildren: () => import('./modules/admin-permisions/admin-permisions.module').then(
+          data => data.AdminPermisionsModule
+        )
       }
     ]
   }

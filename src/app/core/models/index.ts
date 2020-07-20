@@ -3,7 +3,10 @@ export namespace CoreModels {
         name: string;
         email: string;
         password: string;
-        banned: boolean;
+        status: string;
+        adminPassword?: string;
+        features: number[];
+        permisions: number[];
         id?: number;
     }
     export interface ITask {
@@ -27,5 +30,15 @@ export namespace CoreModels {
         theme: string;
         whoCome: number[];
         id?: number;
+    }
+    export interface IFeature {
+        name: string;
+        title: string;
+        id: string;
+    }
+    export interface IPermision {
+        name: string;
+        title: string;
+        id: string;
     }
 }

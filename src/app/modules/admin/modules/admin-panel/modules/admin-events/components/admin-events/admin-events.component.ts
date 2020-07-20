@@ -1,11 +1,13 @@
+import { StorageService } from './../../../../../../../../core/services/storage.service';
+import { UserService } from './../../../../../../../../core/services/user.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CoreModels } from 'src/app/core/models';
 import { ErrorService } from './../../../../../../../../core/services/error.service';
 import { EventService } from './../../../../../../../../core/services/event.service';
-import { FormControl } from '@angular/forms';
 
 
 interface IMode {
@@ -19,6 +21,8 @@ interface IMode {
   styleUrls: ['./admin-events.component.scss']
 })
 export class AdminEventsComponent implements OnInit {
+
+  public canAddEvent: boolean;
 
   public isLoad: boolean = false;
 
@@ -37,7 +41,9 @@ export class AdminEventsComponent implements OnInit {
 
   constructor(
     private readonly eventService: EventService,
-    private readonly errorService: ErrorService
+    private readonly errorService: ErrorService,
+    private readonly userService: UserService,
+    private readonly storageSrvice: StorageService
   ) { }
 
 
@@ -67,11 +73,18 @@ export class AdminEventsComponent implements OnInit {
         this.isLoad = true;
       },
       () => this.errorService.throwServerError('Can not get events')
-    )
+    );
     this.eventService.addSubject$.asObservable().subscribe(
       event => {
         this.dataSource.data.push(event)
       }
+    );
+    this.userService.getUser(this.storageSrvice.adminId).subscribe(
+      user => {
+        this.canAddEvent = user.permisions.includes(3);
+        console.log(user.permisions)
+      },
+      () => this.errorService.throwServerError('Can not get permisions')
     )
   }
   public applyFilter(event: Event) {
@@ -89,6 +102,7 @@ export class AdminEventsComponent implements OnInit {
     let value: string = this.valueControl.value;
     if (mode === 'none') {
       this.dataSource.data = this.events;
+      this.reset();
     } else if (mode === 'id') {
       if (value.includes('<')) {
         this.dataSource.data = this.events.filter(event => event.id < Number(value.slice(1)));
@@ -103,6 +117,7 @@ export class AdminEventsComponent implements OnInit {
       }
     }
   }
+
   public reset() {
     this.dataSource.data = this.events;
     this.valueControl.reset();

@@ -70,15 +70,31 @@
       "name": "User",
       "email": "email@email.com",
       "password": "12345678",
-      "banned": false,
+      "status": "active",
+      "features": [
+        1
+      ],
+      "permisions": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "adminPassword": "321",
       "id": 1
     },
     {
       "name": "Test",
       "email": "test@test",
       "password": "12345678",
-      "banned": false,
-      "id": 2
+      "status": "active",
+      "features": [
+        1
+      ],
+      "permisions": [],
+      "id": 2,
+      "adminPassword": "15616548614"
     }
   ],
   "events": [
@@ -112,18 +128,38 @@
       "id": 3
     }
   ],
-  "admins": [
-    "wekc$drim2u2$hrc87tey^vw8cnye8vhfj$fd*",
-    "1"
+  "features": [
+    {
+      "name": "view-events",
+      "title": "View events",
+      "id": 1
+    }
   ],
-  "features": {
-    "watch-events": [
-      1,
-      2,
-      5
-    ],
-    "admin": [
-      2
-    ]
-  }
+  "permisions": [
+    {
+      "name": "view-admin-panel",
+      "title": "View admin panel",
+      "id": 1
+    },
+    {
+      "name": "edit-status",
+      "title": "Edit status",
+      "id": 2
+    },
+    {
+      "name": "create-event",
+      "title": "Create event",
+      "id": 3
+    },
+    {
+      "name": "set-feature",
+      "title": "Set feature",
+      "id": 4
+    },
+    {
+      "name": "set-premision",
+      "title": "Set premision",
+      "id": 5
+    }
+  ]
 }

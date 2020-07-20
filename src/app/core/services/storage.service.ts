@@ -1,3 +1,4 @@
+import { UserService } from './user.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -18,6 +19,10 @@ export class StorageService {
     this.cachedUserId = userId;
   }
 
+  public get adminId(): number {
+    return Number(localStorage.getItem('admin'));
+  }
+
   constructor(
     private readonly router: Router
   ) {
@@ -29,8 +34,8 @@ export class StorageService {
     localStorage.removeItem(this.userKey);
   }
 
-  public initAdmin() {
-    localStorage.setItem('admin', 'true');
+  public initAdmin(id: number) {
+    localStorage.setItem('admin', String(id));
     this.router.navigateByUrl('admin/panel');
   }
 

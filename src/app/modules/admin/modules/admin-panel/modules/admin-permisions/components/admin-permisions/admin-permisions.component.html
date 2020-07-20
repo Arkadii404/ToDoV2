@@ -33,29 +33,48 @@
             <td mat-cell *matCellDef="let row"> {{row.id}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-            <td mat-cell *matCellDef="let row"> {{row.name}} </td>
-        </ng-container>
-
         <ng-container matColumnDef="email">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
             <td mat-cell *matCellDef="let row"> {{row.email}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="password">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Password </th>
-            <td mat-cell *matCellDef="let row"> {{row.password}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="bann">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+        <ng-container matColumnDef="features">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Features </th>
             <td mat-cell *matCellDef="let row">
                 <mat-form-field appearance="standard">
-                    <mat-select [value]="row.status" (selectionChange)="updateStatus(status.value, row.id)" #status
-                        [disabled]="!canChangeStatus">
-                        <mat-option value="active">Active</mat-option>
-                        <mat-option value="banned">Banned</mat-option>
+                    <mat-label>Features</mat-label>
+                    <mat-select (selectionChange)="updateFeatures(feat.value, row.id)" #feat
+                        [disabled]="!canSetFeatures" multiple [value]="row.features">
+                        <mat-select-trigger>
+                            {{feat.value ? features[0]?.title : ''}}
+                            <span *ngIf="feat.value?.length > 1" class="example-additional-selection">
+                              (+{{feat.value.length - 1}} {{feat.value?.length === 2 ? 'other' : 'others'}})
+                            </span>
+                          </mat-select-trigger>
+                        <ng-container *ngFor="let feature of features">
+                            <mat-option [value]="feature.id">{{ feature.title }}</mat-option>
+                        </ng-container>                                               
+                    </mat-select>
+                </mat-form-field>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="permisions">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Permisions </th>
+            <td mat-cell *matCellDef="let row">
+                <mat-form-field appearance="standard">
+                    <mat-label>Permisions</mat-label>
+                    <mat-select (selectionChange)="updatePermisions(perm.value, row.id)" #perm
+                        [disabled]="!canSetPermisions" multiple [value]="row.permisions">
+                        <mat-select-trigger>
+                            {{perm.value ? permisions[0]?.title : ''}}
+                            <span *ngIf="perm.value?.length > 1" class="example-additional-selection">
+                              (+{{perm.value.length - 1}} {{perm.value?.length === 2 ? 'other' : 'others'}})
+                            </span>
+                          </mat-select-trigger>
+                        <ng-container *ngFor="let permision of permisions">
+                            <mat-option [value]="permision.id">{{ permision.title }}</mat-option>
+                        </ng-container>                                               
                     </mat-select>
                 </mat-form-field>
             </td>

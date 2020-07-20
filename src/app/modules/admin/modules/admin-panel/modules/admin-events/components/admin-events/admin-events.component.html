@@ -1,7 +1,7 @@
 <div [hidden]="!isLoad">
-    <app-add-event></app-add-event>
+    <app-add-event *ngIf="canAddEvent"></app-add-event>
     
-    <mat-divider class="horizontal"></mat-divider>
+    <mat-divider class="horizontal" *ngIf="canAddEvent"></mat-divider>
 
     <div [hidden]="!isLoad" class="sort">
         <mat-form-field class="input">

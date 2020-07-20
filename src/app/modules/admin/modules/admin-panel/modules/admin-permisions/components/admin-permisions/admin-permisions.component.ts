@@ -1,12 +1,15 @@
+import { PasswordModalComponent } from './../password-modal/password-modal.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CoreModels } from 'src/app/core/models';
+import { AdminService } from './../../../../../../../../core/services/admin.service';
 import { ErrorService } from './../../../../../../../../core/services/error.service';
 import { StorageService } from './../../../../../../../../core/services/storage.service';
 import { UserService } from './../../../../../../../../core/services/user.service';
+import { MatDialog } from '@angular/material/dialog';
 
 
 interface IMode {
@@ -14,25 +17,25 @@ interface IMode {
   viewValue: string;
 }
 
-
 @Component({
-  selector: 'app-admin-users',
-  templateUrl: './admin-users.component.html',
-  styleUrls: ['./admin-users.component.scss']
+  selector: 'app-admin-permisions',
+  templateUrl: './admin-permisions.component.html',
+  styleUrls: ['./admin-permisions.component.scss']
 })
-export class AdminUsersComponent implements OnInit {
+export class AdminPermisionsComponent implements OnInit {
 
   public isLoad = false;
 
-  public displayedColumns: string[] = ['id', 'name', 'email', 'password', 'bann'];
+  public displayedColumns: string[] = ['id', 'email', 'features', 'permisions'];
 
   public dataSource: MatTableDataSource<CoreModels.IUser>;
 
-  public canChangeStatus: boolean;
+  public canSetFeatures: boolean;
+
+  public canSetPermisions: boolean;
 
   public modes: IMode[] = [
-    {value: 'id', viewValue: 'ID'},
-    {value: 'status', viewValue: 'Banned'},
+    {value: 'id', viewValue: 'ID'}
   ];
 
   public modeControl = new FormControl(this.modes[0].value);
@@ -40,13 +43,19 @@ export class AdminUsersComponent implements OnInit {
 
   public users: CoreModels.IUser[];
 
+  public permisions: CoreModels.IPermision[] = [];
+
+  public features: CoreModels.IFeature[] = [];
+
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
     private readonly userService: UserService,
     private readonly storageService: StorageService,
-    private readonly errorService: ErrorService
+    private readonly errorService: ErrorService,
+    private readonly adminService: AdminService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -57,9 +66,16 @@ export class AdminUsersComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.isLoad = true,
-        this.canChangeStatus = users.find(user => user.id == this.storageService.adminId).permisions.includes(2);
+        this.canSetFeatures = users.find(user => user.id == this.storageService.adminId).permisions.includes(4);
+        this.canSetPermisions = users.find(user => user.id == this.storageService.adminId).permisions.includes(5);
       },
       () => this.errorService.throwServerError('Can not get user')
+    );
+    this.adminService.getFeaturesAndPermisions().subscribe(
+      ([features, permisions]) => {
+        this.features = features;
+        this.permisions = permisions;
+      }
     )
   }
 
@@ -72,11 +88,17 @@ export class AdminUsersComponent implements OnInit {
     }
   }
 
-  public updateStatus(status: string, id: number) {
-    console.log(status, id)
-    this.userService.updateStatus(status, id).subscribe(
-      () => { },
-      () => this.errorService.throwServerError('Updation was falied')
+  public updateFeatures(value: number[], id: number) {
+    this.userService.updateFeatures(value, id).subscribe();
+  }
+
+  public updatePermisions(value: number[], id: number) {
+    this.userService.updatePermisions(value, id).subscribe(
+      user => {
+        if (!user.adminPassword && user.permisions.includes(1)) {
+          this.openDialog(user.id);
+        }
+      }
     )
   }
 
@@ -116,6 +138,12 @@ export class AdminUsersComponent implements OnInit {
     if (event.keyCode === 13) {
       this.filter();
     }
+  }
+
+  public openDialog(id: number) {
+    this.dialog.open(PasswordModalComponent, {
+      data: {id}
+    })
   }
 
 }

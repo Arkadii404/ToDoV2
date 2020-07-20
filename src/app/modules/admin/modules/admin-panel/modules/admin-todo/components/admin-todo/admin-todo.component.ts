@@ -1,11 +1,11 @@
-import { CoreModels } from 'src/app/core/models';
-import { FormControl } from '@angular/forms';
-import { ErrorService } from './../../../../../../../../core/services/error.service';
-import { TaskService } from './../../../../../../../../core/services/task.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { CoreModels } from 'src/app/core/models';
+import { ErrorService } from './../../../../../../../../core/services/error.service';
+import { TaskService } from './../../../../../../../../core/services/task.service';
 
 
 interface IMode {
@@ -71,6 +71,7 @@ export class AdminTodoComponent implements OnInit {
     let value: string = this.valueControl.value;
     if (mode === 'none') {
       this.dataSource.data = this.tasks;
+      this.reset();
     } else if (mode === 'id') {
       if (value.includes('<')) {
         this.dataSource.data = this.tasks.filter(task => task.id < Number(value.slice(1)));
@@ -97,6 +98,7 @@ export class AdminTodoComponent implements OnInit {
       }
     }
   }
+  
   public reset() {
     this.dataSource.data = this.tasks;
     this.valueControl.reset();

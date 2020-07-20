@@ -35,7 +35,20 @@ export class UserService {
     return this.apiService.request('PATCH', `users/${this.storageService.userId}`, {password});
   }
 
-  public bunn(banned: boolean, id: number): Observable<CoreModels.IUser> {
-    return this.apiService.request('PATCH', `users/${id}`, {banned});
+  public updateStatus(status: string, id: number): Observable<CoreModels.IUser> {
+    return this.apiService.request('PATCH', `users/${id}`, {status});
   }
+
+  public updateFeatures(features: number[], id: number): Observable<CoreModels.IUser> {
+    return this.apiService.request('PATCH', `users/${id}`, {features});
+  }
+
+  public updatePermisions(permisions: number[], id: number): Observable<CoreModels.IUser> {
+    return this.apiService.request('PATCH', `users/${id}`, {permisions});
+  }
+
+  public updateAdminPassword(adminPassword: string, id: number): Observable<CoreModels.IUser> {
+    return this.apiService.request('PATCH', `users/${id}`, {adminPassword});
+  }
+
 }

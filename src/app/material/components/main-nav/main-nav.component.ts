@@ -1,7 +1,6 @@
+import { UserService } from './../../../core/services/user.service';
 import { Router } from '@angular/router';
-import { StorageService } from './../../../core/services/storage.service';
-import { FeatchesService } from './../../../core/services/featchers.service';
-import { EventService } from './../../../core/services/event.service';
+import { StorageService } from './../../../core/services/storage.service';;
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
@@ -25,16 +24,19 @@ export class MainNavComponent implements OnInit {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private readonly featchesService: FeatchesService,
     private readonly storageService: StorageService,
+    private readonly userService: UserService,
     private readonly router: Router
   ) { }
 
   ngOnInit(): void {
-    this.featchesService.getFeatches().subscribe(data => {
-      this.canWatchEvents = data['watch-events'].includes(this.storageService.userId);
-      this.isAdmin = data['admin'].includes(this.storageService.userId);
-    })
+    this.userService.getCurrentUser().subscribe(
+      user => {
+        this.canWatchEvents = user.features.includes(1);
+        this.isAdmin = user.permisions.includes(1);
+      }
+    )
+
   }
 
   public exit() {

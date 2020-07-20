@@ -6,6 +6,7 @@
       <a mat-list-item [routerLink]="['/admin/panel/tasks']" routerLinkActive="active">Taks</a>
       <a mat-list-item [routerLink]="['/admin/panel/users']" routerLinkActive="active">Users</a>
       <a mat-list-item [routerLink]="['/admin/panel/events']" routerLinkActive="active">Events</a>
+      <a mat-list-item [routerLink]="['/admin/panel/permisions']" routerLinkActive="active" *ngIf="canWatchPermisions">Permisions</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

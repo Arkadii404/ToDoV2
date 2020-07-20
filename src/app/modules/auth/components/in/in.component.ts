@@ -10,7 +10,7 @@ import { FormControl, Validators } from '@angular/forms';
   templateUrl: './in.component.html',
   styleUrls: ['./in.component.scss']
 })
-export class InComponent {
+export class InComponent implements OnInit{
   
   constructor(
     private readonly userService: UserService,
@@ -18,6 +18,19 @@ export class InComponent {
     private readonly errorService: ErrorService,
     private readonly router: Router 
   ) { }
+
+  ngOnInit(): void {
+    if (localStorage.getItem('admin')) {
+      this.userService.getUser(Number(localStorage.getItem('admin'))).subscribe(
+        user => {
+          if (user.status != 'banned') {
+            this.storageService.userId = user.id;
+            this.router.navigateByUrl('main/todo');
+          }
+        }
+      )
+    }
+  }
 
   public hide = true;
 
@@ -44,11 +57,11 @@ export class InComponent {
       users => {
         let user = users.find(user => user.password === this.password.value && user.email == this.email.value);
         if (user) {
-          if (user.banned) {
+          if (user.status === 'banned') {
             this.errorService.throwError('You are banned');
           } else {
             this.storageService.userId = user.id;
-            this.router.navigateByUrl('main/todo')
+            this.router.navigateByUrl('main/todo');
           }
         } else {
           this.errorService.throwError('There are no users with this credantials')
