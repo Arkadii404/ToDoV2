@@ -23,12 +23,12 @@ export class AdminTodoComponent implements OnInit {
   public isLoad = false;
 
   public displayedColumns: string[] = ['id', 'title', 'message', 'userId'];
-  
+
   public dataSource: MatTableDataSource<any>;
 
   public modes: IMode[] = [
-    {value: 'id', viewValue: 'ID'},
-    {value: 'user', viewValue: 'User ID'}
+    { value: 'id', viewValue: 'ID' },
+    { value: 'user', viewValue: 'User ID' }
   ];
 
   public modeControl = new FormControl(this.modes[0].value);
@@ -38,6 +38,11 @@ export class AdminTodoComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+
+  private sorts = {
+    id: true,
+    userId: false
+  }
 
   constructor(
     private readonly taskService: TaskService,
@@ -98,7 +103,7 @@ export class AdminTodoComponent implements OnInit {
       }
     }
   }
-  
+
   public reset() {
     this.dataSource.data = this.tasks;
     this.valueControl.reset();
@@ -107,6 +112,27 @@ export class AdminTodoComponent implements OnInit {
   public check(event: KeyboardEvent) {
     if (event.keyCode === 13) {
       this.filter();
+    }
+  }
+
+  public sorting(data: string) {
+    switch (data) {
+      case 'id':
+        this.sorts.id = !this.sorts.id;
+        if (this.sorts.id) {
+          this.dataSource.data = this.dataSource.data.sort((a, b) => a.id - b.id)
+        } else {
+          this.dataSource.data = this.dataSource.data.sort((a, b) => b.id - a.id)
+        }
+        break;
+      case 'userId':
+        this.sorts.userId = !this.sorts.userId;
+        if (this.sorts.userId) {
+          this.dataSource.data = this.dataSource.data.sort((a, b) => a.userId - b.userId)
+        } else {
+          this.dataSource.data = this.dataSource.data.sort((a, b) => b.userId - a.userId)
+        }
+        break;
     }
   }
 

@@ -29,7 +29,8 @@
     <table mat-table [dataSource]="dataSource" matSort>
 
         <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sorting('id')"
+            matTooltip="Click to sort" matTooltipHideDelay="100" class="sorter"> ID </th>
             <td mat-cell *matCellDef="let row"> {{row.id}} </td>
         </ng-container>
 
@@ -39,7 +40,8 @@
         </ng-container>
 
         <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="sorting('email')"
+            matTooltip="Click to sort" matTooltipHideDelay="100" class="sorter"> Email </th>
             <td mat-cell *matCellDef="let row"> {{row.email}} </td>
         </ng-container>
 

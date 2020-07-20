@@ -39,6 +39,11 @@ export class AdminEventsComponent implements OnInit {
   public modeControl = new FormControl(this.modes[0].value);
   public valueControl = new FormControl(null);
 
+  private sorts = {
+    id: true,
+    date: false
+  }
+
   constructor(
     private readonly eventService: EventService,
     private readonly errorService: ErrorService,
@@ -126,6 +131,43 @@ export class AdminEventsComponent implements OnInit {
   public check(event: KeyboardEvent) {
     if (event.keyCode === 13) {
       this.filter();
+    }
+  }
+
+  public sorting(data: string) {
+    switch (data) {
+      case 'id':
+        this.sorts.id = !this.sorts.id;
+        if (this.sorts.id) {
+          this.dataSource.data = this.dataSource.data.sort((a, b) => a.id - b.id)
+        } else {
+          this.dataSource.data = this.dataSource.data.sort((a, b) => b.id - a.id)
+        }
+        break;
+      case 'date':
+        this.sorts.date = !this.sorts.date;
+        if (this.sorts.date) {
+          this.dataSource.data = this.dataSource.data.sort((a, b) => {
+            if (a.date > b.date) {
+              return -1;
+            } else if (a.date < b.date) {
+              return 1;
+            } else {
+              return 0;
+            }
+          })
+        } else {
+          this.dataSource.data = this.dataSource.data.sort((a, b) => {
+            if (b.date > a.date) {
+              return -1;
+            } else if (b.date < a.date) {
+              return 1;
+            } else {
+              return 0;
+            }
+          })
+        }
+        break;
     }
   }
 

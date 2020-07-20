@@ -31,14 +31,18 @@ export class AdminUsersComponent implements OnInit {
   public canChangeStatus: boolean;
 
   public modes: IMode[] = [
-    {value: 'id', viewValue: 'ID'},
-    {value: 'status', viewValue: 'Banned'},
+    { value: 'id', viewValue: 'ID' }
   ];
 
   public modeControl = new FormControl(this.modes[0].value);
   public valueControl = new FormControl(null);
 
   public users: CoreModels.IUser[];
+
+  private sorts = {
+    id: true,
+    email: false
+  }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -57,7 +61,7 @@ export class AdminUsersComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.isLoad = true,
-        this.canChangeStatus = users.find(user => user.id == this.storageService.adminId).permisions.includes(2);
+          this.canChangeStatus = users.find(user => user.id == this.storageService.adminId).permisions.includes(2);
       },
       () => this.errorService.throwServerError('Can not get user')
     )
@@ -98,15 +102,9 @@ export class AdminUsersComponent implements OnInit {
       } else {
         this.dataSource.data = this.users.filter(user => user.id == Number(value));
       }
-    } else if (mode === 'status') {
-      if (value === 'banned') {
-        this.dataSource.data = this.users.filter(user => user.status === 'banned');
-      } else if (value === 'active') {
-        this.dataSource.data = this.users.filter(user => user.status === 'actice');
-      }
     }
-  } 
-  
+  }
+
   public reset() {
     this.dataSource.data = this.users;
     this.valueControl.reset();
@@ -115,6 +113,43 @@ export class AdminUsersComponent implements OnInit {
   public check(event: KeyboardEvent) {
     if (event.keyCode === 13) {
       this.filter();
+    }
+  }
+
+  public sorting(data: string) {
+    switch (data) {
+      case 'id':
+        this.sorts.id = !this.sorts.id;
+        if (this.sorts.id) {
+          this.dataSource.data = this.dataSource.data.sort((a, b) => a.id - b.id)
+        } else {
+          this.dataSource.data = this.dataSource.data.sort((a, b) => b.id - a.id)
+        }
+        break;
+      case 'email':
+        this.sorts.email = !this.sorts.email;
+        if (this.sorts.email) {
+          this.dataSource.data = this.dataSource.data.sort((a, b) => {
+            if (a.email > b.email) {
+              return -1;
+            } else if (a.email < b.email) {
+              return 1;
+            } else {
+              return 0;
+            }
+          })
+        } else {
+          this.dataSource.data = this.dataSource.data.sort((a, b) => {
+            if (b.email > a.email) {
+              return -1;
+            } else if (b.email < a.email) {
+              return 1;
+            } else {
+              return 0;
+            }
+          })
+        }
+        break;
     }
   }
 
