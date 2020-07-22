@@ -1,7 +1,7 @@
-import { ErrorService } from './../../../../../../core/services/error.service';
-import { TaskService } from './../../../../../../core/services/task.service';
 import { Component, OnInit } from '@angular/core';
 import { CoreModels } from 'src/app/core/models';
+import { ErrorService } from './../../../../../../core/services/error.service';
+import { TaskService } from './../../../../../../core/services/task.service';
 
 @Component({
   selector: 'app-todo',
@@ -34,7 +34,7 @@ export class TodoComponent implements OnInit {
     );
 
     this.taskService.removeSubject$.asObservable().subscribe(      
-      id => {this.tasks = this.tasks.filter(task => task.id !== id);console.log(id)}
+      id => this.tasks = this.tasks.filter(task => task.id !== id)
     );
 
     this.taskService.addTasksSubject$.asObservable().subscribe(task => this.tasks.unshift(task));

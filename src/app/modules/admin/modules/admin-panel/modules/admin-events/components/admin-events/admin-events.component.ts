@@ -87,7 +87,6 @@ export class AdminEventsComponent implements OnInit {
     this.userService.getUser(this.storageSrvice.adminId).subscribe(
       user => {
         this.canAddEvent = user.permisions.includes(3);
-        console.log(user.permisions)
       },
       () => this.errorService.throwServerError('Can not get permisions')
     )
@@ -95,7 +94,6 @@ export class AdminEventsComponent implements OnInit {
   public applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    console.log(filterValue.trim().toLowerCase())
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();

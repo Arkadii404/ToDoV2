@@ -10,7 +10,7 @@ import { FormControl, Validators } from '@angular/forms';
   templateUrl: './in.component.html',
   styleUrls: ['./in.component.scss']
 })
-export class InComponent implements OnInit{
+export class InComponent {
   
   constructor(
     private readonly userService: UserService,
@@ -18,19 +18,6 @@ export class InComponent implements OnInit{
     private readonly errorService: ErrorService,
     private readonly router: Router 
   ) { }
-
-  ngOnInit(): void {
-    if (localStorage.getItem('admin')) {
-      this.userService.getUser(Number(localStorage.getItem('admin'))).subscribe(
-        user => {
-          if (user.status != 'banned') {
-            this.storageService.userId = user.id;
-            this.router.navigateByUrl('main/todo');
-          }
-        }
-      )
-    }
-  }
 
   public hide = true;
 

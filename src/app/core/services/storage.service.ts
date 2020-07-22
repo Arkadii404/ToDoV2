@@ -20,7 +20,7 @@ export class StorageService {
   }
 
   public get adminId(): number {
-    return Number(localStorage.getItem('admin'));
+    return Number(sessionStorage.getItem('admin'));
   }
 
   constructor(
@@ -35,7 +35,7 @@ export class StorageService {
   }
 
   public initAdmin(id: number) {
-    localStorage.setItem('admin', String(id));
+    sessionStorage.setItem('admin', String(id));
     this.router.navigateByUrl('admin/panel');
   }
 

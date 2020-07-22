@@ -12,14 +12,14 @@ export class AdminGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
       if (state.url.startsWith('/admin/panel')) {
-        if (localStorage.getItem('admin')) {
+        if (sessionStorage.getItem('admin')) {
           return true;
         } else {
           this.router.navigateByUrl('admin');
           return false;
         }
       } else {
-        if (!localStorage.getItem('admin')) {
+        if (!sessionStorage.getItem('admin')) {
           return true;        
         } else {
           this.router.navigateByUrl('admin/panel');

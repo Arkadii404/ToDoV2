@@ -77,7 +77,6 @@ export class AdminUsersComponent implements OnInit {
   }
 
   public updateStatus(status: string, id: number) {
-    console.log(status, id)
     this.userService.updateStatus(status, id).subscribe(
       () => { },
       () => this.errorService.throwServerError('Updation was falied')
@@ -121,9 +120,9 @@ export class AdminUsersComponent implements OnInit {
       case 'id':
         this.sorts.id = !this.sorts.id;
         if (this.sorts.id) {
-          this.dataSource.data = this.dataSource.data.sort((a, b) => a.id - b.id)
+          this.dataSource.data = this.dataSource.data.sort((a, b) => a.id - b.id);
         } else {
-          this.dataSource.data = this.dataSource.data.sort((a, b) => b.id - a.id)
+          this.dataSource.data = this.dataSource.data.sort((a, b) => b.id - a.id);
         }
         break;
       case 'email':
