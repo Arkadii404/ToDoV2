@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { CoreModels } from 'src/app/core/models';
-import { AdminService } from './../../../../../../core/services/admin.service';
-import { ErrorService } from './../../../../../../core/services/error.service';
-import { StorageService } from './../../../../../../core/services/storage.service';
-import { UserService } from './../../../../../../core/services/user.service';
+import { AdminService } from '@core/services/admin.service';
+import { ErrorService } from '@core/services/error.service';
+import { StorageService } from '@core/services/storage.service';
+import { UserService } from '@core/services/user.service';
 
 @Component({
   selector: 'app-admin-auth',
@@ -32,7 +32,7 @@ export class AdminAuthComponent implements OnInit {
     if (this.userId) {
       this.userService.getCurrentUser().subscribe(user => this.user = user)
     } else {
-      this.userService.getUsers().subscribe(users => this.users = users)
+      this.userService.get().subscribe(users => this.users = users)
     }
   }
 

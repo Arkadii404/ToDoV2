@@ -1,6 +1,6 @@
-import { ErrorService } from './../../../core/services/error.service';
-import { StorageService } from './../../../core/services/storage.service';
-import { UserService } from './../../../core/services/user.service';
+import { ErrorService } from '@core/services/error.service';
+import { StorageService } from '@core/services/storage.service';
+import { UserService } from '@core/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
@@ -39,7 +39,7 @@ export class StepperComponent implements OnInit {
   }
 
   public addUser() {
-    this.userService.getUsers().subscribe(
+    this.userService.get().subscribe(
       users => {
         if (users.filter(user => user.email === this.secondFormGroup.controls.secondCtrl.value).length) {
           this.errorService.throwError('User with this email has been registrated yet')

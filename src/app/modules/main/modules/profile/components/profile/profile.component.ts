@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CoreModels } from 'src/app/core/models';
-import { ErrorService } from './../../../../../../core/services/error.service';
-import { StorageService } from './../../../../../../core/services/storage.service';
-import { UserService } from './../../../../../../core/services/user.service';
+import { ErrorService } from '@core/services/error.service';
+import { StorageService } from '@core/services/storage.service';
+import { UserService } from '@core/services/user.service';
 import { DialogComponent } from './../dialog/dialog.component';
 
 @Component({

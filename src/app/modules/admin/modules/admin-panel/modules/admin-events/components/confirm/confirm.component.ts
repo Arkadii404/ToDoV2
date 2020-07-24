@@ -1,7 +1,7 @@
 import { MatDialog } from '@angular/material/dialog';
-import { ErrorService } from './../../../../../../../../core/services/error.service';
+import { ErrorService } from '@core/services/error.service';
 import { CoreModels } from 'src/app/core/models';
-import { EventService } from './../../../../../../../../core/services/event.service';
+import { EventService } from '@core/services/event.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

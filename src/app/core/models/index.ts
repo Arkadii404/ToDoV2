@@ -41,4 +41,8 @@ export namespace CoreModels {
         title: string;
         id: string;
     }
+    export interface IMode {
+        value: string;
+        viewValue: string;
+    }
 }

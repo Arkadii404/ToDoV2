@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CoreModels } from 'src/app/core/models';
-import { ErrorService } from './../../../../../../core/services/error.service';
-import { EventService } from './../../../../../../core/services/event.service';
+import { ErrorService } from '@core/services/error.service';
+import { EventService } from '@core/services/event.service';
 
 @Component({
   selector: 'app-events',

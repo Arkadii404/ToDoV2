@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ErrorService } from './../../../../../../../../core/services/error.service';
-import { EventService } from './../../../../../../../../core/services/event.service';
+import { EventService } from '@core/services/event.service';
 import { ConfirmComponent } from './../confirm/confirm.component';
 
 @Component({

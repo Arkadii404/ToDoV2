@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { UserService } from './../../../../../../../../core/services/user.service';
+import { UserService } from '@core/services/user.service';
 
 @Component({
   selector: 'app-password-modal',

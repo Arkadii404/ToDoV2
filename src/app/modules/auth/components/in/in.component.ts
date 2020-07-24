@@ -1,7 +1,7 @@
-import { ErrorService } from './../../../../core/services/error.service';
+import { ErrorService } from '@core/services/error.service';
 import { Router } from '@angular/router';
-import { StorageService } from './../../../../core/services/storage.service';
-import { UserService } from './../../../../core/services/user.service';
+import { StorageService } from '@core/services/storage.service';
+import { UserService } from '@core/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
@@ -40,7 +40,7 @@ export class InComponent {
   }
 
   public handle() {
-    this.userService.getUsers().subscribe(
+    this.userService.get().subscribe(
       users => {
         let user = users.find(user => user.password === this.password.value && user.email == this.email.value);
         if (user) {

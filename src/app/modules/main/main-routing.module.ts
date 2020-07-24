@@ -1,4 +1,4 @@
-import { EventGuard } from './../../core/guards/event.guard';
+import { EventGuard } from '@core/guards/event.guard';
 import { MainComponent } from './components/main/main.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';

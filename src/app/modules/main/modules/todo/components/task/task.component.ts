@@ -1,6 +1,6 @@
-import { ErrorService } from './../../../../../../core/services/error.service';
+import { ErrorService } from '@core/services/error.service';
 import { FormControl, Validators } from '@angular/forms';
-import { TaskService } from './../../../../../../core/services/task.service';
+import { TaskService } from '@core/services/task.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { CoreModels } from 'src/app/core/models';
 

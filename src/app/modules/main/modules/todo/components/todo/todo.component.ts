@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CoreModels } from 'src/app/core/models';
-import { ErrorService } from './../../../../../../core/services/error.service';
-import { TaskService } from './../../../../../../core/services/task.service';
+import { ErrorService } from '@core/services/error.service';
+import { TaskService } from '@core/services/task.service';
 
 @Component({
   selector: 'app-todo',

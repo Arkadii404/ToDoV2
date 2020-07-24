@@ -1,3 +1,4 @@
+import { IServerListService } from './../interfaces/server-list.service.interface';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -8,7 +9,7 @@ import { StorageService } from './storage.service';
 @Injectable({
   providedIn: 'root'
 })
-export class TaskService {
+export class TaskService implements IServerListService<CoreModels.ITask> {
 
   public addTasksSubject$ = new Subject<CoreModels.ITask>();
 
@@ -19,17 +20,17 @@ export class TaskService {
     private readonly storageService: StorageService
   ) { }
 
-  public getAllTasks(): Observable<CoreModels.ITask[]> {
+  public get(): Observable<CoreModels.ITask[]> {
     return this.apiService.request('GET', 'tasks', {});
   }
 
   public getTusksOfCurrentUser(): Observable<CoreModels.ITask[]> {
-    return this.getAllTasks().pipe(
+    return this.get().pipe(
       map((tasks: CoreModels.ITask[]) => tasks.filter(task => task.userId === this.storageService.userId))
     );
   }
 
-  public getTask(id: number): Observable<CoreModels.ITask> {
+  public getDetails(id: number): Observable<CoreModels.ITask> {
     return this.apiService.request('GET', `tasks/${id}`, {})
   }
 

@@ -1,8 +1,8 @@
-import { MatDialog } from '@angular/material/dialog';
-import { ErrorService } from './../../../../../../core/services/error.service';
-import { FormControl, Validators } from '@angular/forms';
-import { UserService } from './../../../../../../core/services/user.service';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorService } from '@core/services/error.service';
+import { UserService } from '@core/services/user.service';
 
 @Component({
   selector: 'app-dialog',

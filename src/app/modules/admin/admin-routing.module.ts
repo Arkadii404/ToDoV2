@@ -1,7 +1,6 @@
-import { AdminGuard } from './../../core/guards/admin.guard';
-import { AdminComponent } from './components/admin/admin.component';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { AdminGuard } from '@core/guards/admin.guard';
 
 const routes: Routes = [
   {

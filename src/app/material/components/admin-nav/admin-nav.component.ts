@@ -1,9 +1,9 @@
-import { UserService } from './../../../core/services/user.service';
-import { Router } from '@angular/router';
-import { AdminService } from './../../../core/services/admin.service';
-import { StorageService } from './../../../core/services/storage.service';
-import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AdminService } from '@core/services/admin.service';
+import { StorageService } from '@core/services/storage.service';
+import { UserService } from '@core/services/user.service';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
@@ -31,7 +31,7 @@ export class AdminNavComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userService.getUser(this.storageService.adminId).subscribe(
+    this.userService.getDetails(this.storageService.adminId).subscribe(
       user => {
         this.canWatchPermisions = user.permisions.includes(4) || user.permisions.includes(5)
       }

@@ -1,21 +1,17 @@
-import { PasswordModalComponent } from './../password-modal/password-modal.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { AdminService } from '@core/services/admin.service';
+import { ErrorService } from '@core/services/error.service';
+import { StorageService } from '@core/services/storage.service';
+import { UserService } from '@core/services/user.service';
 import { CoreModels } from 'src/app/core/models';
-import { AdminService } from './../../../../../../../../core/services/admin.service';
-import { ErrorService } from './../../../../../../../../core/services/error.service';
-import { StorageService } from './../../../../../../../../core/services/storage.service';
-import { UserService } from './../../../../../../../../core/services/user.service';
-import { MatDialog } from '@angular/material/dialog';
+import { PasswordModalComponent } from './../password-modal/password-modal.component';
 
 
-interface IMode {
-  value: string;
-  viewValue: string;
-}
 
 @Component({
   selector: 'app-admin-permisions',
@@ -34,7 +30,7 @@ export class AdminPermisionsComponent implements OnInit {
 
   public canSetPermisions: boolean;
 
-  public modes: IMode[] = [
+  public modes: CoreModels.IMode[] = [
     {value: 'id', viewValue: 'ID'}
   ];
 
@@ -59,7 +55,7 @@ export class AdminPermisionsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.getUsers().subscribe(
+    this.userService.get().subscribe(
       users => {
         this.users = users;
         this.dataSource = new MatTableDataSource(users)

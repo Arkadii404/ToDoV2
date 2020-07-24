@@ -1,6 +1,6 @@
-import { ErrorService } from './../../../../../../core/services/error.service';
-import { EventService } from './../../../../../../core/services/event.service';
-import { StorageService } from './../../../../../../core/services/storage.service';
+import { ErrorService } from '@core/services/error.service';
+import { EventService } from '@core/services/event.service';
+import { StorageService } from '@core/services/storage.service';
 import { CoreModels } from 'src/app/core/models';
 import { Component, OnInit, Input } from '@angular/core';
 

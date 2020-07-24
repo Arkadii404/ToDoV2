@@ -1,9 +1,9 @@
-import { ErrorService } from './../../../../../../core/services/error.service';
-import { CoreModels } from 'src/app/core/models';
-import { StorageService } from './../../../../../../core/services/storage.service';
-import { TaskService } from './../../../../../../core/services/task.service';
-import { FormControl, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { ErrorService } from '@core/services/error.service';
+import { StorageService } from '@core/services/storage.service';
+import { TaskService } from '@core/services/task.service';
+import { CoreModels } from 'src/app/core/models';
 
 @Component({
   selector: 'app-add-task',
@@ -18,7 +18,7 @@ export class AddTaskComponent {
   constructor(
     private readonly taskService: TaskService,
     private readonly storageService: StorageService,
-    private readonly errorService: ErrorService 
+    private readonly errorService: ErrorService
   ) { }
 
   public addTask() {
