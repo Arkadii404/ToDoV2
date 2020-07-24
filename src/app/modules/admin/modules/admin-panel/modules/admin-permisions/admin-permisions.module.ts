@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { SharedModule } from './../../../../../../shared/shared.module';
 import { AdminPermisionsRoutingModule } from './admin-permisions-routing.module';
@@ -10,7 +9,6 @@ import { PasswordModalComponent } from './components/password-modal/password-mod
 @NgModule({
   declarations: [AdminPermisionsComponent, PasswordModalComponent],
   imports: [
-    CommonModule,
     AdminPermisionsRoutingModule,
     SharedModule
   ]

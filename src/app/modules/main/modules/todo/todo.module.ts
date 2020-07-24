@@ -1,16 +1,14 @@
-import { TodoRoutingModule } from './todo-routing-module';
-import { SharedModule } from './../../../../shared/shared.module';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TodoComponent } from './components/todo/todo.component';
+import { SharedModule } from './../../../../shared/shared.module';
 import { AddTaskComponent } from './components/add-task/add-task.component';
 import { TaskComponent } from './components/task/task.component';
+import { TodoComponent } from './components/todo/todo.component';
+import { TodoRoutingModule } from './todo-routing-module';
 
 
 @NgModule({
   declarations: [TodoComponent, AddTaskComponent, TaskComponent],
   imports: [
-    CommonModule,
     SharedModule,
     TodoRoutingModule
   ],

@@ -1,3 +1,4 @@
+import { StorageService } from './../../../../../../../../core/services/storage.service';
 import { Component, Injector, OnInit } from '@angular/core';
 import { UserService } from '@core/services/user.service';
 import { CoreModels } from 'src/app/core/models';
@@ -17,6 +18,7 @@ export class AdminUsersComponent extends BaseAdminListComponent<CoreModels.IUser
   public canChangeStatus: boolean;
 
   constructor(
+    private readonly storageService: StorageService,
     protected readonly service: UserService,
     injector: Injector
   ) { 

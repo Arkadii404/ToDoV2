@@ -1,3 +1,4 @@
+import { StorageService } from './../../../../../../../../core/services/storage.service';
 import { Component, Injector, OnInit } from '@angular/core';
 import { EventService } from '@core/services/event.service';
 import { UserService } from '@core/services/user.service';
@@ -19,6 +20,7 @@ export class AdminEventsComponent extends BaseAdminListComponent<CoreModels.IEve
 
   
   constructor(
+    private readonly storageService: StorageService,
     protected readonly service: EventService,
     injector: Injector,
     private readonly userService: UserService
@@ -42,7 +44,7 @@ export class AdminEventsComponent extends BaseAdminListComponent<CoreModels.IEve
     )
   }
 
-  processItems(items: CoreModels.IEvent[]) {
+  protected processItems(items: CoreModels.IEvent[]) {
     items.forEach(item => {
       let date = new Date(item.date);
       let day = date.getDate().toString();

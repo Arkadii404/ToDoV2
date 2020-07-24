@@ -1,7 +1,6 @@
+import { NgModule } from '@angular/core';
 import { SharedModule } from './../../shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { AdminComponent } from './components/admin/admin.component';
 
 
@@ -9,7 +8,6 @@ import { AdminComponent } from './components/admin/admin.component';
 @NgModule({
   declarations: [AdminComponent],
   imports: [
-    CommonModule,
     AdminRoutingModule,
     SharedModule
   ]
