@@ -11,10 +11,18 @@ import { CoreModels } from '../models'
 })
 export class UserService implements IServerListService<CoreModels.IUser> {
 
+  public adminPermisions: number[];
+
   constructor(
     private readonly apiService: ApiService,
     private readonly storageService: StorageService
-  ) { }
+  ) {
+    if (sessionStorage.getItem('admin')) {
+      this.getDetails(Number(sessionStorage.getItem('admin'))).subscribe(
+        user => this.adminPermisions = user.permisions
+      )
+    }
+  }
 
   public get(): Observable<CoreModels.IUser[]> {
     return this.apiService.request('GET', 'users', {});

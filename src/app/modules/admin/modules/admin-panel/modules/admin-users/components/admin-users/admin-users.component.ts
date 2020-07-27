@@ -13,12 +13,11 @@ import { BaseAdminListComponent } from '../../../../core/base/base-admin-list';
 })
 export class AdminUsersComponent extends BaseAdminListComponent<CoreModels.IUser> implements OnInit {
 
-  public displayedColumns: string[] = ['id', 'name', 'email', 'password', 'bann'];
+  public displayedColumns: string[] = ['id', 'name', 'email', 'bann'];
 
   public canChangeStatus: boolean;
 
   constructor(
-    private readonly storageService: StorageService,
     protected readonly service: UserService,
     injector: Injector
   ) { 
@@ -40,27 +39,6 @@ export class AdminUsersComponent extends BaseAdminListComponent<CoreModels.IUser
       () => { },
       () => this.errorService.throwServerError('Updation was falied')
     )
-  }
-
-  public filter() {
-    let mode: string = this.modeControl.value;
-    let value: string = this.valueControl.value;
-    if (mode === 'none') {
-      this.dataSource.data = this.items;
-      this.reset();
-    } else if (mode === 'id') {
-      if (value.includes('<')) {
-        this.dataSource.data = this.items.filter(user => user.id < Number(value.slice(1)));
-      } else if (value.includes('>')) {
-        this.dataSource.data = this.items.filter(user => user.id > Number(value.slice(1)));
-      } else if (value.includes('-')) {
-        let start: number = +value.split('-')[0];
-        let end: number = +value.split('-')[1];
-        this.dataSource.data = this.items.filter(user => user.id >= start && user.id <= end);
-      } else {
-        this.dataSource.data = this.items.filter(user => user.id == Number(value));
-      }
-    }
   }
 
 }

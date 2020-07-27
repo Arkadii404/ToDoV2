@@ -12,9 +12,7 @@ import { map, shareReplay } from 'rxjs/operators';
   templateUrl: './admin-nav.component.html',
   styleUrls: ['./admin-nav.component.scss']
 })
-export class AdminNavComponent implements OnInit {
-
-  public canWatchPermisions: boolean;
+export class AdminNavComponent {
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -25,18 +23,8 @@ export class AdminNavComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private readonly adminService: AdminService,
-    private readonly storageService: StorageService,
-    private readonly userService: UserService,
     private readonly router: Router
   ) {}
-
-  ngOnInit(): void {
-    this.userService.getDetails(this.storageService.adminId).subscribe(
-      user => {
-        this.canWatchPermisions = user.permisions.includes(4) || user.permisions.includes(5)
-      }
-    )
-  }
 
   public exit() {
     this.adminService.removeAdmin();

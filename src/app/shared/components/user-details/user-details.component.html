@@ -1,0 +1,54 @@
+<mat-dialog-content class="mat-typography">
+    <mat-list role="list">
+        <mat-list-item role="listitem">Name: {{ user.name }}</mat-list-item>
+        <mat-list-item role="listitem">Email: {{ user.email }}</mat-list-item>
+        <mat-list-item role="listitem">Password: {{ user.password }}</mat-list-item>
+        <mat-list-item role="listitem">User ID: {{ user.id }}</mat-list-item>
+    </mat-list>
+
+    <mat-list role="list" class="actions">
+        <mat-list-item role="listitem" class="action">
+            <mat-form-field appearance="standard">
+                <mat-select [value]="user.status" (selectionChange)="updateStatus(status.value, user.id)" #status
+                    [disabled]="!canSetStatus">
+                    <mat-option value="active">Active</mat-option>
+                    <mat-option value="banned">Banned</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-list-item>
+        <mat-list-item role="listitem" class="action">
+            <mat-form-field appearance="standard">
+                <mat-label>Features</mat-label>
+                <mat-select (selectionChange)="updateFeatures(feat.value, user.id)" #feat [disabled]="!canSetFeatures"
+                    multiple [value]="user.features">
+                    <mat-select-trigger *ngIf="features">
+                        {{feat.value ? features[0]?.title : ''}}
+                        <span *ngIf="feat.value?.length > 1" class="example-additional-selection">
+                            (+{{feat.value?.length - 1}} {{feat.value?.length === 2 ? 'other' : 'others'}})
+                        </span>
+                    </mat-select-trigger>
+                    <ng-container *ngFor="let feature of features">
+                        <mat-option [value]="feature.id">{{ feature.title }}</mat-option>
+                    </ng-container>
+                </mat-select>
+            </mat-form-field>
+        </mat-list-item>
+        <mat-list-item role="listitem" class="action">
+            <mat-form-field appearance="standard">
+                <mat-label>Permisions</mat-label>
+                <mat-select (selectionChange)="updatePermisions(perm.value, user.id)" #perm
+                    [disabled]="!canSetPermisions" multiple [value]="user.permisions">
+                    <mat-select-trigger *ngIf="permisions">
+                        {{perm.value ? permisions[0]?.title : ''}}
+                        <span *ngIf="perm.value?.length > 1" class="example-additional-selection">
+                            (+{{perm.value?.length - 1}} {{perm.value?.length === 2 ? 'other' : 'others'}})
+                        </span>
+                    </mat-select-trigger>
+                    <ng-container *ngFor="let permision of permisions">
+                        <mat-option [value]="permision.id">{{ permision.title }}</mat-option>
+                    </ng-container>
+                </mat-select>
+            </mat-form-field>
+        </mat-list-item>
+    </mat-list>
+</mat-dialog-content>

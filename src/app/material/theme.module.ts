@@ -26,6 +26,7 @@ import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { StepperComponent } from './components/stepper/stepper.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 const MATERIAL_MODULES = [
@@ -48,7 +49,8 @@ const MATERIAL_MODULES = [
   MatDatepickerModule,
   MatNativeDateModule,
   MatSelectModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatGridListModule
 ];
 
 @NgModule({

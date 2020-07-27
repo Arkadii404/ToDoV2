@@ -1,0 +1,13 @@
+<div [ngSwitch]="data.target">
+    <div *ngSwitchCase="'users'">
+        <h2 mat-dialog-title>User Info</h2>
+        <app-user-details [user]="data.dto"></app-user-details>
+    </div>
+    <div *ngSwitchCase="'events'">
+        <h2 mat-dialog-title>Event Info</h2>
+        <app-events-details [event]="data.dto"></app-events-details>
+    </div>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Close</button>
+    </mat-dialog-actions>
+</div>

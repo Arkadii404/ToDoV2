@@ -1,17 +1,25 @@
+import { AdminDetailsComponent } from './../../../../../../shared/components/admin-details/admin-details.component';
 import { Directive, Injector, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { CoreModels } from '@core/models';
 import { ErrorService } from '@core/services/error.service';
 import { IServerListService } from '../../../../../../core/interfaces/server-list.service.interface';
+import { StorageService } from '@core/services/storage.service';
+import {MatDialog} from '@angular/material/dialog';
+
 
 @Directive()
 export abstract class BaseAdminListComponent<T> implements OnInit {
     /* services */
     protected abstract readonly service: IServerListService<T>;
     protected readonly errorService: ErrorService;
+    protected readonly router: Router;
+    protected readonly storageService: StorageService;
+    protected readonly dialog: MatDialog;
 
     public modes: CoreModels.IMode[] = [
         { value: 'id', viewValue: 'ID' }
@@ -24,7 +32,7 @@ export abstract class BaseAdminListComponent<T> implements OnInit {
         email: false
     }
 
-    public items: T[];
+    public items: any[];
 
     public dataSource: MatTableDataSource<any>;
 
@@ -37,6 +45,9 @@ export abstract class BaseAdminListComponent<T> implements OnInit {
         private readonly injector: Injector
     ) {
         this.errorService = this.injector.get(ErrorService);
+        this.router = this.injector.get(Router);
+        this.storageService = this.injector.get(StorageService);
+        this.dialog = this.injector.get(MatDialog);
     }
 
     @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -49,6 +60,7 @@ export abstract class BaseAdminListComponent<T> implements OnInit {
     protected getItems() {
         this.service.get().subscribe(
             items => {
+                this.items = items;
                 this.processItems(items);
                 this.initTable(items);
                 this.isLoad = true;
@@ -74,7 +86,38 @@ export abstract class BaseAdminListComponent<T> implements OnInit {
         }
     }
 
-    protected filter() { }
+    public filter() {
+        let mode: string = this.modeControl.value;
+        let value: string = this.valueControl.value;
+        if (mode === 'none') {
+          this.dataSource.data = this.items;
+          this.reset();
+        } else if (mode === 'id') {
+          if (value.includes('<')) {
+            this.dataSource.data = this.items.filter(item => item.id < Number(value.slice(1)));
+          } else if (value.includes('>')) {
+            this.dataSource.data = this.items.filter(item => item.id > Number(value.slice(1)));
+          } else if (value.includes('-')) {
+            let start: number = +value.split('-')[0];
+            let end: number = +value.split('-')[1];
+            this.dataSource.data = this.items.filter(item => item.id >= start && item.id <= end);
+          } else {
+            this.dataSource.data = this.items.filter(item => item.id == Number(value));
+          }
+        } else if (mode === 'user') {
+          if (value.includes('<')) {
+            this.dataSource.data = this.items.filter(item => item.userId < Number(value.slice(1)));
+          } else if (value.includes('>')) {
+            this.dataSource.data = this.items.filter(item => item.userId > Number(value.slice(1)));
+          } else if (value.includes('-')) {
+            let start: number = +value.split('-')[0];
+            let end: number = +value.split('-')[1];
+            this.dataSource.data = this.items.filter(item => item.userId >= start && item.userId <= end);
+          } else {
+            this.dataSource.data = this.items.filter(item => item.userId == Number(value));
+          }
+        }
+      }
 
     public check(event: KeyboardEvent) {
         if (event.keyCode === 13) {
@@ -155,4 +198,20 @@ export abstract class BaseAdminListComponent<T> implements OnInit {
         this.dataSource.data = this.items;
         this.valueControl.reset();
     }
+
+    public showDetails(event: MouseEvent, target: string, dto: T) {
+        if (!(event.target as HTMLElement).closest('.mat-form-field-infix')) {
+           this.openDialog(dto, target)
+        }
+    }
+
+    private openDialog(dto: T, target: string) {
+        this.dialog.open(AdminDetailsComponent, {
+            data: {
+                target,
+                dto 
+            }
+        })
+    }
+
 }

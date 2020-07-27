@@ -13,3 +13,12 @@ th.mat-sort-header-sorted {
     font-size: 14px;
     width: 100%;
 }
+
+td,
+th {
+    width: 20%;
+}
+
+tr {
+    cursor: pointer;
+}

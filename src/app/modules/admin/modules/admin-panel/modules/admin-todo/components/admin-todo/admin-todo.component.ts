@@ -25,37 +25,4 @@ export class AdminTodoComponent extends BaseAdminListComponent<CoreModels.ITask>
     super(injector);
   }
 
-  public filter() {
-    let mode: string = this.modeControl.value;
-    let value: string = this.valueControl.value;
-    if (mode === 'none') {
-      this.dataSource.data = this.items;
-      this.reset();
-    } else if (mode === 'id') {
-      if (value.includes('<')) {
-        this.dataSource.data = this.items.filter(task => task.id < Number(value.slice(1)));
-      } else if (value.includes('>')) {
-        this.dataSource.data = this.items.filter(task => task.id > Number(value.slice(1)));
-      } else if (value.includes('-')) {
-        let start: number = +value.split('-')[0];
-        let end: number = +value.split('-')[1];
-        this.dataSource.data = this.items.filter(task => task.id >= start && task.id <= end);
-      } else {
-        this.dataSource.data = this.items.filter(task => task.id == Number(value));
-      }
-    } else if (mode === 'user') {
-      if (value.includes('<')) {
-        this.dataSource.data = this.items.filter(task => task.userId < Number(value.slice(1)));
-      } else if (value.includes('>')) {
-        this.dataSource.data = this.items.filter(task => task.userId > Number(value.slice(1)));
-      } else if (value.includes('-')) {
-        let start: number = +value.split('-')[0];
-        let end: number = +value.split('-')[1];
-        this.dataSource.data = this.items.filter(task => task.userId >= start && task.userId <= end);
-      } else {
-        this.dataSource.data = this.items.filter(task => task.userId == Number(value));
-      }
-    }
-  }
-
 }

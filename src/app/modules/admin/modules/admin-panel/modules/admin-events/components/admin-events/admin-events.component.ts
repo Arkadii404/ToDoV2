@@ -16,11 +16,10 @@ export class AdminEventsComponent extends BaseAdminListComponent<CoreModels.IEve
 
   public canAddEvent: boolean;
 
-  public displayedColumns: string[] = ['id', 'title', 'theme', 'place', 'date', 'whoCome', 'description'];
+  public displayedColumns: string[] = ['id', 'title', 'theme', 'place', 'date'];
 
   
   constructor(
-    private readonly storageService: StorageService,
     protected readonly service: EventService,
     injector: Injector,
     private readonly userService: UserService
@@ -58,27 +57,6 @@ export class AdminEventsComponent extends BaseAdminListComponent<CoreModels.IEve
       }
       item.date = `${day}.${month}.${year}`;
     })
-  }
-
-  public filter() {
-    let mode: string = this.modeControl.value;
-    let value: string = this.valueControl.value;
-    if (mode === 'none') {
-      this.dataSource.data = this.items;
-      this.reset();
-    } else if (mode === 'id') {
-      if (value.includes('<')) {
-        this.dataSource.data = this.items.filter(event => event.id < Number(value.slice(1)));
-      } else if (value.includes('>')) {
-        this.dataSource.data = this.items.filter(event => event.id > Number(value.slice(1)));
-      } else if (value.includes('-')) {
-        let start: number = +value.split('-')[0];
-        let end: number = +value.split('-')[1];
-        this.dataSource.data = this.items.filter(event => event.id >= start && event.id <= end);
-      } else {
-        this.dataSource.data = this.items.filter(event => event.id == Number(value));
-      }
-    }
   }
 
 }
