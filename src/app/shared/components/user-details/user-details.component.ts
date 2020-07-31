@@ -39,13 +39,13 @@ export class UserDetailsComponent implements OnInit {
         this.canSetFeatures = user.permisions.includes(4);
         this.canSetStatus = user.permisions.includes(2);
       }
-    )
+    );
     this.adminService.getFeaturesAndPermisions().subscribe(
       ([features, permisions]) => {
         this.features = features;
         this.permisions = permisions;
       }
-    )
+    );
   }
 
   public updateStatus(status: string, id: number) {
@@ -74,4 +74,5 @@ export class UserDetailsComponent implements OnInit {
       data: {id}
     })
   }
+
 }

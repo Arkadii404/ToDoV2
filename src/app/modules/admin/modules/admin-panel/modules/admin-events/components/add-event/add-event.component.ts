@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { EventService } from '@core/services/event.service';
 import { ConfirmComponent } from './../confirm/confirm.component';
+import { DateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-add-event',
@@ -19,8 +20,11 @@ export class AddEventComponent implements OnInit {
 
   constructor(
     private readonly eventService: EventService,
-    public readonly dialog: MatDialog
-  ) { }
+    public readonly dialog: MatDialog,
+    private _adapter: DateAdapter<any>
+  ) {
+    this._adapter.setLocale('ru');
+  }
 
   ngOnInit(): void {
     this.eventService.addSubject$.asObservable().subscribe(
